@@ -62,8 +62,8 @@ body {
 }
 
 .cover .cover-content {
-  /* Mengikuti proporsi foto cover portrait pada desktop. */
-  width: min(90vw, 34rem);
+  width: min(90vw, 66.7vh);
+  max-width: none;
   margin: 0 auto;
   padding: clamp(2rem, 3.5vw, 3rem);
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -91,7 +91,6 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* --- UPDATE FONT COVER (Pinyon Script) --- */
 .cover .cover-couple {
   display: flex;
   flex-direction: column;
@@ -110,6 +109,7 @@ body {
   line-height: 0.7;
   margin: 0.08em 0;
 }
+
 @media (max-width: 768px) {
   .cover .cover-couple {
     font-size: clamp(3rem, 13vw, 4rem);

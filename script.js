@@ -381,3 +381,77 @@ openBtn.addEventListener("click", function(e) {
     adjustHeroHeight(); // Tambahkan ini
 });
 })();
+
+/* ================================================================
+   FINAL: satu gesture mobile berpindah satu slide + animasi pengantin.
+================================================================ */
+(function () {
+  if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+  const main = document.getElementById('main-content');
+  if (!main) return;
+
+  const slides = () => Array.from(main.children).flatMap((element) => {
+    if (element.id === 'pengantin') {
+      return Array.from(element.querySelectorAll('.col-lg-6'));
+    }
+    return ['HEADER', 'SECTION', 'FOOTER'].includes(element.tagName) ? [element] : [];
+  });
+
+  const topOf = (element) =>
+    element.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop;
+
+  const currentSlideIndex = (items) => items.reduce((nearest, item, index) =>
+    Math.abs(topOf(item) - main.scrollTop) < Math.abs(topOf(items[nearest]) - main.scrollTop)
+      ? index
+      : nearest, 0);
+
+  const go = (direction) => {
+    if (document.querySelector('.modal.show')) return;
+    const items = slides();
+    const nextIndex = Math.max(0, Math.min(items.length - 1, currentSlideIndex(items) + direction));
+    const next = items[nextIndex];
+    if (!next) return;
+    next.classList.add('animated');
+    main.scrollTo({ top: topOf(next), behavior: 'smooth' });
+  };
+
+  /* Kedua pengantin diberi animasi saat benar-benar terlihat. */
+  const cards = document.querySelectorAll('#pengantin .col-lg-6');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('animated');
+    });
+  }, { root: main, threshold: 0.35 });
+  cards.forEach((card) => observer.observe(card));
+
+  let startY = 0;
+  let startedInGallery = false;
+  main.addEventListener('touchstart', (event) => {
+    startY = event.touches[0].clientY;
+    startedInGallery = Boolean(event.target.closest('.photo-gallery'));
+  }, { passive: true });
+
+  main.addEventListener('touchend', (event) => {
+    const distance = startY - event.changedTouches[0].clientY;
+    if (Math.abs(distance) < 45 || startedInGallery) return;
+    go(distance > 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* Scroll normal di galeri; swipe pada ujung galeri pindah halaman. */
+  document.querySelectorAll('.photo-gallery').forEach((gallery) => {
+    let galleryStartY = 0;
+    gallery.addEventListener('touchstart', (event) => {
+      galleryStartY = event.touches[0].clientY;
+    }, { passive: true });
+    gallery.addEventListener('touchend', (event) => {
+      const distance = galleryStartY - event.changedTouches[0].clientY;
+      if (Math.abs(distance) < 45) return;
+      const atTop = gallery.scrollTop <= 1;
+      const atBottom = gallery.scrollTop + gallery.clientHeight >= gallery.scrollHeight - 1;
+      if ((distance < 0 && atTop) || (distance > 0 && atBottom)) {
+        go(distance > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  });
+})();

@@ -178,7 +178,7 @@ function animateOnScroll() {
 }
 
     // --- 4. Countdown Timer ---
-    const weddingDate = new Date("2026-05-06T10:00:00+08:00").getTime();
+    const weddingDate = new Date("2026-10-16T08:00:00+08:00").getTime();
     const countdownInterval = setInterval(() => {
         const now = new Date().getTime();
         const diff = weddingDate - now;

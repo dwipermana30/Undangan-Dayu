@@ -158,6 +158,35 @@ if (mainContent) {
 document.querySelectorAll(".photo-gallery").forEach((gallery) => {
     gallery.addEventListener("scroll", animateOnScroll, { passive: true });
 });
+    // --- 3. Buka Undangan Event ---
+   if (openBtn) {
+    openBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        coverPage.classList.add("fade-out");
+        
+        // Ambil semua gambar hero
+        const images = document.querySelectorAll(".hero-bg-img");
+        
+        setTimeout(() => {
+            coverPage.style.display = "none";
+            mainContent.classList.add("fade-in");
+            document.body.style.overflow = "auto";
+            
+            // FIX: Paksa foto pertama langsung 'active' agar mulai zoom-out dari 1.15 ke 1
+            if (images.length > 0) {
+                images[0].classList.add("active");
+            }
+            
+            startSlideshow(); 
+            animateOnScroll(); 
+        }, 500);
+
+        if (music) {
+            music.play().catch(err => console.log("Autoplay dicegah browser"));
+        }
+    });
+}
+
     // --- 4. Countdown Timer ---
     const weddingDate = new Date("2026-10-16T08:00:00+08:00").getTime();
     const countdownInterval = setInterval(() => {
@@ -359,8 +388,13 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
     }
 }
 
-// Jalankan saat halaman dimuat.
+// Jalankan saat load dan saat buka undangan
 window.addEventListener('load', adjustHeroHeight);
+// Panggil fungsi ini juga di dalam event listener openBtn.click
+openBtn.addEventListener("click", function(e) {
+    // ... kode yang sudah ada ...
+    adjustHeroHeight(); // Tambahkan ini
+});
 })();
 
 /* ================================================================

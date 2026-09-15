@@ -145,9 +145,13 @@ function animateOnScroll() {
         }
     });
 }
-    window.addEventListener("scroll", animateOnScroll);
+  window.addEventListener("scroll", animateOnScroll, { passive: true });
     window.addEventListener("resize", animateOnScroll);
+    // Pada mobile, scroll terjadi di #main-content (bukan lagi di window).
     
+if (mainContent) {
+    mainContent.addEventListener("scroll", animateOnScroll, { passive: true });
+}
     // --- 3. Buka Undangan Event ---
    if (openBtn) {
     openBtn.addEventListener("click", function(e) {

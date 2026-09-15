@@ -2030,3 +2030,81 @@ main > section:not(#doa),
     height: 100% !important;
   }
 }
+
+/* ================================================================
+   FINAL: galeri scroll internal + satu pengantin per slide (mobile).
+================================================================ */
+@media (max-width: 768px) {
+  #main-content,
+  #main-content.fade-in {
+    scroll-snap-type: y mandatory !important;
+  }
+
+  /* Hanya setiap kartu pengantin yang menjadi titik snap. */
+  #main-content > #pengantin {
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+
+  #pengantin > .container > .row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+  }
+
+  #pengantin .col-lg-6 {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100dvh !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: always !important;
+  }
+
+  #pengantin .col-lg-6 .pengantin-card {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #pengantin .col-lg-6.animated .pengantin-card {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto;
+  }
+
+  /* Galeri tetap satu slide; foto dapat di-scroll di area galeri saja. */
+  #main-content > section.gallery {
+    display: flex !important;
+    flex-direction: column;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    max-height: 100dvh !important;
+    padding: 1rem !important;
+    overflow: hidden !important;
+  }
+
+  #main-content > section.gallery > h2 {
+    flex: 0 0 auto;
+    margin-bottom: .75rem !important;
+  }
+
+  #main-content > section.gallery .photo-gallery {
+    flex: 1 1 auto;
+    min-height: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0 .2rem 1rem;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  #main-content > section.gallery .photo-gallery::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #main-content > section.gallery .photo-gallery::-webkit-scrollbar-thumb {
+    background: rgba(122, 106, 88, .45);
+    border-radius: 999px;
+  }
+}

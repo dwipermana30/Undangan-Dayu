@@ -262,7 +262,9 @@ if (mainContent) {
     if(commentContainer) {
         database.ref('ucapan').orderByChild('waktu').limitToLast(100).on('value', (snapshot) => {
             commentContainer.replaceChildren();
+            let hasComments = false;
             snapshot.forEach((childSnapshot) => {
+                hasComments = true;
                 const data = childSnapshot.val();
                 const item = document.createElement('div');
                 item.className = 'comment-item';
@@ -287,6 +289,13 @@ if (mainContent) {
                 divider.className = 'comment-divider';
                 commentContainer.insertBefore(divider, item.nextSibling);
             });
+
+            if (!hasComments) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.className = 'comment-empty';
+                emptyMessage.textContent = 'Belum ada konfirmasi. Jadilah yang pertama mengirim ucapan.';
+                commentContainer.append(emptyMessage);
+            }
         });
     }
 

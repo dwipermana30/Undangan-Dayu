@@ -1745,3 +1745,48 @@ main > section:not(#doa),
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
+/* Tempelkan PALING BAWAH pada style.css. */
+
+/* Tombol cover mengikuti isi teks, tidak melebar satu layar. */
+.cover .custom-open-btn {
+  align-self: center;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: fit-content !important;
+  min-width: 0 !important;
+  margin-top: 2.25rem !important;
+  padding: 0.7rem 1.35rem !important;
+  border-width: 1px !important;
+  border-radius: 999px !important;
+  font-size: clamp(0.85rem, 2.5vw, 1rem) !important;
+  line-height: 1.2;
+}
+
+/* Jarak bawah nama agar bingkai tombol tidak bertumpuk dengan teks. */
+.cover .cover-couple {
+  margin-bottom: 0 !important;
+}
+
+/* Save the Date berada tepat di atas countdown di bawah slideshow. */
+.hero .hero-text > .mt-5 {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: 7.15rem;
+  margin: 0 !important;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.hero .hero-text > .mt-5 .btn-save-date {
+  margin: 0 !important;
+  padding: 0.58rem 1.15rem !important;
+  font-size: clamp(0.78rem, 2.3vw, 0.92rem) !important;
+}
+
+@media (max-width: 360px) {
+  .hero .hero-text > .mt-5 {
+    bottom: 6.7rem;
+  }
+}

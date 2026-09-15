@@ -379,10 +379,11 @@ window.addEventListener('load', adjustHeroHeight);
     return ['HEADER', 'SECTION', 'FOOTER'].includes(element.tagName) ? [element] : [];
   });
 
-  const topOf = (element) => element.getBoundingClientRect().top + window.scrollY;
+  const topOf = (element) =>
+    element.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop;
 
   const currentSlideIndex = (items) => items.reduce((nearest, item, index) =>
-    Math.abs(topOf(item) - window.scrollY) < Math.abs(topOf(items[nearest]) - window.scrollY)
+    Math.abs(topOf(item) - main.scrollTop) < Math.abs(topOf(items[nearest]) - main.scrollTop)
       ? index
       : nearest, 0);
 
@@ -393,7 +394,7 @@ window.addEventListener('load', adjustHeroHeight);
     const next = items[nextIndex];
     if (!next) return;
     next.classList.add('animated');
-    window.scrollTo({ top: topOf(next), behavior: 'smooth' });
+    main.scrollTo({ top: topOf(next), behavior: 'smooth' });
   };
 
   /* Kedua pengantin diberi animasi saat benar-benar terlihat. */
@@ -402,7 +403,7 @@ window.addEventListener('load', adjustHeroHeight);
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add('animated');
     });
-  }, { root: null, threshold: 0.35 });
+  }, { root: main, threshold: 0.35 });
   cards.forEach((card) => observer.observe(card));
 
   let startY = 0;

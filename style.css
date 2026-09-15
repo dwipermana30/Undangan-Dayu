@@ -2258,3 +2258,99 @@ main > section:not(#doa),
 
 .photo-gallery a.animated:nth-child(15) { animation-delay: 1.12s; }
 .photo-gallery a.animated:nth-child(16) { animation-delay: 1.20s; }
+
+/* ================================================================
+   FINAL: tanggal acara lebih tegas di mobile dan slide penutup.
+================================================================ */
+@media (max-width: 768px) {
+  /* Slide tanggal acara: teks besar dan seluruh komponen terpusat. */
+  #details {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem !important;
+  }
+
+  #details > .container {
+    width: min(100%, 32rem);
+  }
+
+  #details .container > p {
+    margin-bottom: 1.5rem !important;
+    font-size: clamp(1.45rem, 5vw, 1.8rem) !important;
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  #details .wedding-date-row {
+    margin-bottom: 2.25rem !important;
+  }
+
+  #details .date-side {
+    font-size: clamp(1.35rem, 5vw, 1.7rem) !important;
+  }
+
+  #details .date-main {
+    font-size: clamp(4.6rem, 19vw, 6.4rem) !important;
+    line-height: 0.85;
+  }
+
+  #details .time-box h5 {
+    font-size: clamp(1.45rem, 5vw, 1.75rem) !important;
+  }
+
+  #details .time-box p {
+    margin-bottom: 0.2rem;
+    font-size: clamp(1.05rem, 3.9vw, 1.25rem) !important;
+  }
+
+  /* Slide terakhir. Unggah foto17.webp ke folder yang sama dengan index.html. */
+  #thanks {
+    position: relative;
+    isolation: isolate;
+    display: grid !important;
+    min-height: 100dvh;
+    place-items: center;
+    overflow: hidden;
+    color: #fff;
+    background: #251a14 url("foto17.webp") center / cover no-repeat;
+  }
+
+  #thanks::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    content: "";
+    background: linear-gradient(135deg, rgba(22, 13, 9, 0.72), rgba(22, 13, 9, 0.46));
+  }
+
+  #thanks .thanks-content {
+    width: min(86%, 29rem);
+    padding: 2.2rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.34);
+    border-radius: 1rem;
+    background: rgba(24, 14, 10, 0.24);
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.26);
+    text-align: center;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.86);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  #thanks .thanks-intro,
+  #thanks .thanks-names {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 4vw, 1.35rem);
+    letter-spacing: 0.04em;
+  }
+
+  #thanks h2 {
+    margin: 0.45rem 0 0.7rem;
+    color: #fff;
+    font-family: 'Pinyon Script', cursive;
+    font-size: clamp(4.4rem, 18vw, 6.2rem);
+    font-weight: 400;
+    line-height: 0.9;
+  }
+}

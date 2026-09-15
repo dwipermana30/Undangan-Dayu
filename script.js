@@ -152,6 +152,12 @@ function animateOnScroll() {
 if (mainContent) {
     mainContent.addEventListener("scroll", animateOnScroll, { passive: true });
 }
+
+// Galeri memiliki area scroll sendiri di mobile. Pantau scroll ini juga
+// supaya foto yang baru masuk ke layar langsung diberi animasi tampil.
+document.querySelectorAll(".photo-gallery").forEach((gallery) => {
+    gallery.addEventListener("scroll", animateOnScroll, { passive: true });
+});
     // --- 3. Buka Undangan Event ---
    if (openBtn) {
     openBtn.addEventListener("click", function(e) {

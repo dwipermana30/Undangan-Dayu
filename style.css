@@ -1893,10 +1893,6 @@ main > section:not(#doa),
   }
 }
 
-/* ================================================================
-   SWIPE TIKTOK — KHUSUS MOBILE
-   Tempel sebagai bagian PALING BAWAH di style.css.
-================================================================ */
 @media (max-width: 768px) {
   html,
   body {
@@ -1913,31 +1909,56 @@ main > section:not(#doa),
     height: 100dvh !important;
     overflow-x: hidden !important;
     overflow-y: auto !important;
-    overscroll-behavior-y: contain;
     scroll-snap-type: y mandatory !important;
     scroll-behavior: smooth;
+    overscroll-behavior-y: contain;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
   }
 
-  /* Semua section menjadi satu halaman penuh. */
   #main-content > header,
   #main-content > section:not(#pengantin),
   #main-content > footer {
     height: 100vh !important;
     height: 100svh !important;
     height: 100dvh !important;
-    min-height: 100vh !important;
-    min-height: 100svh !important;
     min-height: 100dvh !important;
     max-height: 100dvh !important;
-    box-sizing: border-box;
     overflow: hidden;
     scroll-snap-align: start !important;
     scroll-snap-stop: always !important;
   }
 
-  /* Satu foto pengantin per layar pada mobile. */
+  /* Ayat/ucapan berada tepat di tengah layar. */
+  #ucapan {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.25rem !important;
+  }
+
+  #ucapan .container {
+    width: 100%;
+  }
+
+  /* Bagian doa pada foto juga center horizontal dan vertikal. */
+  #doa,
+  #doa .doa-mobile-bg {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+
+  #doa .doa-mobile-bg {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.25rem !important;
+  }
+
+  #doa .doa-mobile-bg .container {
+    width: 100%;
+  }
+
+  /* Dua pengantin: mutlak satu kartu = satu layar. */
   #pengantin {
     height: 200dvh !important;
     min-height: 200dvh !important;
@@ -1948,19 +1969,29 @@ main > section:not(#doa),
   #pengantin > .container,
   #pengantin > .container > .row {
     height: 100%;
+    width: 100%;
+    max-width: none;
     margin: 0;
     padding: 0;
-    max-width: none;
+  }
+
+  #pengantin > .container > .row {
+    flex-wrap: wrap !important;
+    align-content: flex-start;
   }
 
   #pengantin .col-lg-6 {
-    height: 100vh;
-    height: 100svh;
-    height: 100dvh;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
     margin: 0 !important;
     padding: 1rem !important;
-    display: flex;
+    display: flex !important;
     align-items: center;
+    justify-content: center;
     scroll-snap-align: start !important;
     scroll-snap-stop: always !important;
   }
@@ -1977,55 +2008,25 @@ main > section:not(#doa),
     object-fit: contain;
   }
 
-  /* Hero dan doa memenuhi layar. */
-  .hero,
-  #doa,
-  #doa .doa-mobile-bg {
-    height: 100dvh !important;
-    min-height: 100dvh !important;
+  /* Animasi asli tetap dipakai: kartu masuk dari kiri/kanan saat slide terlihat. */
+  #pengantin .col-lg-6 .pengantin-card {
+    opacity: 0;
+    pointer-events: none;
   }
 
-  #doa .doa-mobile-bg {
-    padding: 1.25rem !important;
+  #pengantin .col-lg-6.animated .pengantin-card {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+    pointer-events: auto;
   }
 
-  /* Peta tetap muat satu layar. */
   #location .map-responsive {
     height: min(39dvh, 290px) !important;
     min-height: 0 !important;
     padding-bottom: 0 !important;
-    margin-bottom: 0.85rem !important;
   }
 
   #location .map-responsive iframe {
     height: 100% !important;
-  }
-
-  /* Galeri dirapatkan khusus HP agar tetap satu halaman. */
-  #main-content > .gallery {
-    padding: 1rem !important;
-    overflow-y: auto;
-  }
-
-  .photo-gallery {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.45rem;
-    width: 100%;
-  }
-
-  .photo-gallery a,
-  .photo-gallery img {
-    aspect-ratio: 1;
-  }
-
-  .photo-gallery img {
-    height: 100%;
-    object-fit: cover;
-  }
-
-  /* Jika form atau ucapan panjang, scroll hanya di dalam halaman itu. */
-  #rsvp,
-  #comments-section {
-    overflow-y: auto !important;
   }
 }

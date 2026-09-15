@@ -287,7 +287,12 @@ function animateOnScroll() {
     }
 
     // --- 6. Gallery Modal & Navigation ---
-    const galleryImages = ['foto1.webp', 'foto8.webp', 'foto3.webp', 'foto4.webp', 'foto5.webp', 'foto9.webp', 'foto7.webp', 'foto6.webp'];
+    // Ambil urutan langsung dari thumbnail HTML agar navigasi modal
+    // selalu sama dengan urutan pada bagian "Our Moments".
+    const galleryImages = Array.from(
+        document.querySelectorAll('.photo-gallery img'),
+        (image) => image.getAttribute('src')
+    ).filter(Boolean);
     let currentGalleryIndex = 0;
     const modalImg = document.getElementById('galleryModalImage');
     const nextBtn = document.getElementById('nextGalleryBtn');

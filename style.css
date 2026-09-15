@@ -2349,6 +2349,30 @@ main > section:not(#doa),
   }
 }
 
+/* Mode swipe satu slide per gesture: dipulihkan untuk mobile. */
+@media (max-width: 768px) {
+  html,
+  body {
+    height: 100% !important;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+  }
+
+  #main-content,
+  #main-content.fade-in {
+    position: fixed !important;
+    inset: 0 !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    scroll-snap-type: y mandatory !important;
+    scroll-behavior: smooth;
+    overscroll-behavior-y: none;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
 /* Perbaikan akhir mobile: slideshow awal, pull-to-refresh, dan penutup tanpa bingkai. */
 @media (max-width: 768px) {
   /* Foto pertama langsung tajam; tidak lagi terlihat berhenti dalam keadaan blur. */

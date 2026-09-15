@@ -1784,6 +1784,43 @@ main > section:not(#doa),
   padding: 0.58rem 1.15rem !important;
   font-size: clamp(0.78rem, 2.3vw, 0.92rem) !important;
 }
+/* Tempelkan PALING BAWAH pada style.css. */
+
+/* Intro ringan dan berjarak seperti contoh. */
+.cover .cover-intro {
+  margin-bottom: 1.15rem;
+  color: rgba(255, 255, 255, 0.94);
+  font-family: "Inter", system-ui, sans-serif;
+  font-size: clamp(0.7rem, 2.2vw, 0.88rem);
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.38);
+}
+
+/* Nama: serif klasik, lebih kecil, dan proporsional. */
+.cover .cover-couple {
+  gap: 0.02em;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.15rem, 3vw, 3rem);
+  font-weight: 500;
+  line-height: 0.9;
+  letter-spacing: 0.015em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
+}
+
+.cover .cover-ampersand {
+  font-size: 0.58em;
+  line-height: 0.75;
+  margin: 0.13em 0;
+}
+
+@media (max-width: 768px) {
+  .cover .cover-couple {
+    font-size: clamp(2.15rem, 9vw, 2.7rem);
+  }
+}
 
 @media (max-width: 360px) {
   .hero .hero-text > .mt-5 {

@@ -158,35 +158,6 @@ if (mainContent) {
 document.querySelectorAll(".photo-gallery").forEach((gallery) => {
     gallery.addEventListener("scroll", animateOnScroll, { passive: true });
 });
-    // --- 3. Buka Undangan Event ---
-   if (openBtn) {
-    openBtn.addEventListener("click", function(e) {
-        e.preventDefault();
-        coverPage.classList.add("fade-out");
-        
-        // Ambil semua gambar hero
-        const images = document.querySelectorAll(".hero-bg-img");
-        
-        setTimeout(() => {
-            coverPage.style.display = "none";
-            mainContent.classList.add("fade-in");
-            document.body.style.overflow = "auto";
-            
-            // FIX: Paksa foto pertama langsung 'active' agar mulai zoom-out dari 1.15 ke 1
-            if (images.length > 0) {
-                images[0].classList.add("active");
-            }
-            
-            startSlideshow(); 
-            animateOnScroll(); 
-        }, 500);
-
-        if (music) {
-            music.play().catch(err => console.log("Autoplay dicegah browser"));
-        }
-    });
-}
-
     // --- 4. Countdown Timer ---
     const weddingDate = new Date("2026-10-16T08:00:00+08:00").getTime();
     const countdownInterval = setInterval(() => {
@@ -388,13 +359,8 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
     }
 }
 
-// Jalankan saat load dan saat buka undangan
+// Jalankan saat halaman dimuat.
 window.addEventListener('load', adjustHeroHeight);
-// Panggil fungsi ini juga di dalam event listener openBtn.click
-openBtn.addEventListener("click", function(e) {
-    // ... kode yang sudah ada ...
-    adjustHeroHeight(); // Tambahkan ini
-});
 })();
 
 /* ================================================================
@@ -413,11 +379,10 @@ openBtn.addEventListener("click", function(e) {
     return ['HEADER', 'SECTION', 'FOOTER'].includes(element.tagName) ? [element] : [];
   });
 
-  const topOf = (element) =>
-    element.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop;
+  const topOf = (element) => element.getBoundingClientRect().top + window.scrollY;
 
   const currentSlideIndex = (items) => items.reduce((nearest, item, index) =>
-    Math.abs(topOf(item) - main.scrollTop) < Math.abs(topOf(items[nearest]) - main.scrollTop)
+    Math.abs(topOf(item) - window.scrollY) < Math.abs(topOf(items[nearest]) - window.scrollY)
       ? index
       : nearest, 0);
 
@@ -428,7 +393,7 @@ openBtn.addEventListener("click", function(e) {
     const next = items[nextIndex];
     if (!next) return;
     next.classList.add('animated');
-    main.scrollTo({ top: topOf(next), behavior: 'smooth' });
+    window.scrollTo({ top: topOf(next), behavior: 'smooth' });
   };
 
   /* Kedua pengantin diberi animasi saat benar-benar terlihat. */
@@ -437,7 +402,7 @@ openBtn.addEventListener("click", function(e) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.classList.add('animated');
     });
-  }, { root: main, threshold: 0.35 });
+  }, { root: null, threshold: 0.35 });
   cards.forEach((card) => observer.observe(card));
 
   let startY = 0;

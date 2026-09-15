@@ -1512,3 +1512,222 @@ main > section:not(#doa),
     padding-inline: 0.42rem;
   }
 }
+/* Tempelkan PALING BAWAH pada style.css.
+   Countdown dibuat sebagai satu strip ringan agar foto tetap dominan. */
+.hero .countdown {
+  position: absolute;
+  z-index: 20;
+  left: 50%;
+  bottom: max(1.75rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: inline-flex !important;
+  width: auto;
+  max-width: calc(100vw - 2.5rem);
+  margin: 0 auto 2rem;
+  margin: 0;
+  gap: 0 !important;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: rgba(27, 18, 14, 0.18);
+  box-shadow: 0 8px 24px rgba(20, 12, 8, 0.10);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.hero .countdown div {
+  min-width: 0;
+  flex: 0 1 auto;
+  padding: 0.5rem clamp(0.55rem, 2.4vw, 1.1rem);
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: 0;
+  background: transparent !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.hero .countdown div:last-child {
+  border-right: 0;
+}
+
+.hero .countdown span {
+  color: #fff !important;
+  font-family: 'Forum', serif;
+  font-size: clamp(1.45rem, 5vw, 2rem);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.42);
+}
+
+.hero .countdown small {
+  display: block;
+  margin-top: 0.28rem;
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: clamp(0.48rem, 1.8vw, 0.62rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-shadow: none;
+}
+
+@media (max-width: 360px) {
+  .hero .countdown div {
+    padding-inline: 0.42rem;
+  }
+}
+/* Tempelkan seluruh blok ini PALING BAWAH pada style.css.
+   Simpan fotodoa.webp di folder yang sama dengan index.html dan style.css. */
+
+/* --- Doa dengan latar foto dan teks yang jelas --- */
+#doa .doa-mobile-bg {
+  min-height: clamp(32rem, 72vh, 46rem);
+  padding: 4rem 1.25rem;
+  display: grid !important;
+  place-items: center;
+  background-image:
+    linear-gradient(120deg, rgba(25, 15, 10, 0.72), rgba(25, 15, 10, 0.48)),
+    url("fotodoa.webp") !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  color: #fff !important;
+}
+
+#doa .doa-mobile-bg .container {
+  width: min(100%, 44rem);
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 1rem;
+  background: rgba(21, 13, 9, 0.22);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+#doa .doa-text-top {
+  margin-bottom: 1rem !important;
+  color: #fff !important;
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55) !important;
+}
+
+#doa .doa-text-main {
+  margin: 0;
+  color: #fff !important;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72) !important;
+}
+
+/* --- Galeri: muncul lembut, tanpa efek ayunan --- */
+.photo-gallery {
+  perspective: none;
+}
+
+.photo-gallery a {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(24px) scale(0.985);
+  filter: blur(4px);
+  will-change: opacity, transform, filter;
+}
+
+.photo-gallery a.animated {
+  visibility: visible;
+  animation: galleryReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes galleryReveal {
+  from { opacity: 0; transform: translateY(24px) scale(0.985); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.photo-gallery a.animated:nth-child(1)  { animation-delay: 0.00s; }
+.photo-gallery a.animated:nth-child(2)  { animation-delay: 0.08s; }
+.photo-gallery a.animated:nth-child(3)  { animation-delay: 0.16s; }
+.photo-gallery a.animated:nth-child(4)  { animation-delay: 0.24s; }
+.photo-gallery a.animated:nth-child(5)  { animation-delay: 0.32s; }
+.photo-gallery a.animated:nth-child(6)  { animation-delay: 0.40s; }
+.photo-gallery a.animated:nth-child(7)  { animation-delay: 0.48s; }
+.photo-gallery a.animated:nth-child(8)  { animation-delay: 0.56s; }
+.photo-gallery a.animated:nth-child(9)  { animation-delay: 0.64s; }
+.photo-gallery a.animated:nth-child(10) { animation-delay: 0.72s; }
+.photo-gallery a.animated:nth-child(11) { animation-delay: 0.80s; }
+.photo-gallery a.animated:nth-child(12) { animation-delay: 0.88s; }
+.photo-gallery a.animated:nth-child(13) { animation-delay: 0.96s; }
+.photo-gallery a.animated:nth-child(14) { animation-delay: 1.04s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-gallery a,
+  .photo-gallery a.animated {
+    animation: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    filter: none;
+  }
+}
+
+/* --- Revisi palet undangan dan section doa ---
+   Blok ini harus tetap berada PALING BAWAH pada style.css. */
+:root {
+  --muted: #e4e6d8; /* sage muda: menyatu dengan hijau, emas, dan marun pada foto */
+  --accent: #8a6248;
+  --text: #30231c;
+}
+
+body,
+.bg-light,
+.gallery {
+  background-color: var(--muted) !important;
+}
+
+/* Samakan latar seluruh halaman. #doa dikecualikan karena memakai foto sendiri. */
+#main-content,
+main > section:not(#doa),
+#ucapan,
+#pengantin,
+#details,
+#location,
+#rsvp {
+  background-color: var(--muted) !important;
+}
+
+/* Hilangkan bingkai: teks tampil langsung di atas foto. */
+#doa .doa-mobile-bg {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: none !important;
+}
+
+#doa .doa-mobile-bg::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -14px;
+  background-image:
+    linear-gradient(120deg, rgba(36, 22, 15, 0.64), rgba(67, 42, 29, 0.46)),
+    url("fotodoa.webp");
+  background-size: cover;
+  background-position: center;
+  filter: blur(2px);
+  transform: scale(1.04);
+}
+
+#doa .doa-mobile-bg .container {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}

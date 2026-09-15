@@ -1874,6 +1874,18 @@ main > section:not(#doa),
     scroll-snap-type: y proximity;
   }
 }
+@media (max-width: 768px) {
+  #main-content.fade-in {
+    scroll-snap-type: y proximity;
+    scroll-behavior: smooth;
+  }
+
+  #main-content > header,
+  #main-content > section,
+  #main-content > footer {
+    scroll-snap-stop: normal;
+  }
+}
 
 @media (max-width: 360px) {
   .hero .hero-text > .mt-5 {

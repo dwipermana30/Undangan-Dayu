@@ -359,12 +359,11 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
         });
     }
 
-    const copyBtn = document.getElementById('copyBtn');
-    if(copyBtn) {
-    copyBtn.addEventListener('click', () => {
-        const accNum = document.querySelector('.accnum')?.textContent;
-        if(accNum) {
-            navigator.clipboard.writeText(accNum).then(() => {
+    document.querySelectorAll('.copyBtn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const accNum = btn.closest('.gift-card')?.querySelector('.accnum')?.textContent;
+        if (accNum) {
+            navigator.clipboard.writeText(accNum.trim()).then(() => {
                 Swal.fire({
                     toast: true,
                     position: 'top-end',
@@ -377,7 +376,7 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
             });
         }
     });
-}
+});
     function adjustHeroHeight() {
     if (window.innerWidth <= 768) {
         const vh = window.innerHeight;

@@ -2574,6 +2574,6 @@ main > section:not(#doa),
   /* Geser seluruh blok (Matur Suksma + nama) turun sekaligus, supaya jarak
      antar baris tetap sama dan tidak menabrak teks nama di bawahnya */
   #thanks .thanks-content {
-    transform: translateY(4rem);
+    transform: translateY(2rem);
   }
 }

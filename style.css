@@ -2012,11 +2012,11 @@ main > section:not(#doa),
 }
 
 #wedding-gift .gift-card {
-  background: rgba(255, 255, 255, 0.12) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22) !important;
 }
 
 #wedding-gift .gift-card .bank,
@@ -2072,11 +2072,11 @@ main > section:not(#doa),
 
 /* Form kaca transparan */
 #rsvpForm {
-  background: rgba(255, 255, 255, 0.10) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.22) !important;
 }
 
 #rsvpForm .form-label {
@@ -2086,11 +2086,11 @@ main > section:not(#doa),
 
 #rsvpForm .form-control,
 #rsvpForm .form-select {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
   color: #fff !important;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 #rsvpForm .form-control::placeholder {
@@ -2110,10 +2110,10 @@ main > section:not(#doa),
 }
 
 #rsvp .btn-primary {
-  background: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(255, 255, 255, 0.16) !important;
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
   color: #fff !important;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(2px);
 }
 
 #rsvp .btn-primary:hover {
@@ -2122,12 +2122,12 @@ main > section:not(#doa),
 
 /* Panel hasil ucapan & konfirmasi mengikuti gaya kaca yang sama */
 .rsvp-results {
-  background: rgba(255, 255, 255, 0.10) !important;
-  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
   border-radius: 0.75rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.24) !important;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.2) !important;
   overflow: hidden;
 }
 
@@ -2210,5 +2210,42 @@ main > section:not(#doa),
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+}
+
+/* Mobile: foto pengantin benar-benar penuh 1 layar, edge-to-edge, tanpa celah/padding */
+@media (max-width: 768px) {
+  #pengantin {
+    height: 200vh !important;
+    height: 200svh !important;
+    height: 200dvh !important;
+  }
+
+  #pengantin .col-lg-6 {
+    height: 100vh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  #pengantin .pengantin-card {
+    width: 100% !important;
+    max-width: none !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #pengantin .pengantin-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center 25%;
+  }
+
+  #pengantin .pengantin-overlay {
+    padding: 3rem 1.5rem 2.5rem;
   }
 }

@@ -2066,18 +2066,17 @@ main > section:not(#doa),
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
-/* Form kaca transparan - blur sangat tipis agar foto tetap terlihat */
+/* Form: tanpa bingkai/kartu luar - field langsung di atas foto latar (sesuai referensi) */
 #rsvpForm {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.45) !important;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.18) !important;
+  background: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
 }
 
 #rsvpForm .form-label {
-  color: #fff !important;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  display: none;
 }
 
 #rsvpForm .form-control,
@@ -2091,6 +2090,11 @@ main > section:not(#doa),
 
 #rsvpForm .form-control::placeholder {
   color: rgba(255, 255, 255, 0.75) !important;
+}
+
+#rsvpForm select.form-select:invalid,
+#rsvpForm select.form-select option[value=""] {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 #rsvpForm .form-control:focus,
@@ -2415,4 +2419,30 @@ main > section:not(#doa),
 
 #wedding-gift .gift-card .accname {
   font-size: 0.75rem !important; /* -25% dari 1rem */
+}
+
+/* ================================================================
+   REVISI 4 (permintaan user):
+   1) Field konfirmasi kehadiran: hilangkan label teks di atas field,
+      tanpa bingkai kartu form (sudah diterapkan di atas via #rsvpForm),
+      urutan Nama -> Ucapan -> Konfirmasi Kehadiran -> tombol Kirim.
+   2) Perbaiki sensitifitas swipe di daftar hasil ucapan (lihat script.js
+      untuk penanganan sentuhan pada .comment-container).
+   3) Warna latar pada tiap hasil ucapan sesuai status kehadiran:
+      hijau untuk Hadir, oranye untuk Tidak Hadir.
+================================================================ */
+
+.comment-item {
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.comment-item.comment-hadir {
+  background: rgba(93, 138, 93, 0.35) !important;
+  padding: 10px 14px !important;
+}
+
+.comment-item.comment-tidak-hadir {
+  background: rgba(230, 126, 34, 0.35) !important;
+  padding: 10px 14px !important;
 }

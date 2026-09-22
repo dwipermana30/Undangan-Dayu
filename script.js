@@ -27,16 +27,30 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
-    // --- 0b. Nama Tamu di Cover (?to=Nama+Tamu) ---
-    const guestNameEl = document.getElementById('cover-guest');
-    if (guestNameEl) {
+    // --- 0b. Tanggal Acara di Cover (otomatis dari tanggal pernikahan) ---
+    const coverDateEl = document.getElementById('cover-date-line');
+    if (coverDateEl) {
+        const eventDateForCover = new Date("2026-10-16T08:00:00+08:00");
+        const formattedDate = eventDateForCover.toLocaleDateString('id-ID', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        coverDateEl.textContent = formattedDate.toUpperCase();
+    }
+
+    // --- 0c. Nama Tamu di Cover (?to=Nama+Tamu) ---
+    const guestBlockEl = document.getElementById('cover-guest-block');
+    const guestNameEl = document.getElementById('cover-guest-name');
+    if (guestBlockEl && guestNameEl) {
         const urlParams = new URLSearchParams(window.location.search);
         const guestName = urlParams.get('to') || urlParams.get('kepada') || urlParams.get('nama');
         if (guestName && guestName.trim()) {
-            guestNameEl.textContent = `Kepada Yth. Bapak/Ibu/Saudara/i ${guestName.trim()}`;
-            guestNameEl.style.display = 'block';
+            guestNameEl.textContent = guestName.trim();
+            guestBlockEl.style.display = 'block';
         } else {
-            guestNameEl.style.display = 'none';
+            guestBlockEl.style.display = 'none';
         }
     }
 

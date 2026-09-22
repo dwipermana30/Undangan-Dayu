@@ -1356,7 +1356,7 @@ main > section:not(#doa),
   line-height: 0.9;
   letter-spacing: 0.015em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
-  transform: translateY(3.5rem); /* geser turun agar tidak menutupi wajah pengantin pria */
+  transform: translateY(2rem); /* geser turun agar tidak menutupi wajah pengantin pria */
 }
 
 .cover .cover-ampersand {

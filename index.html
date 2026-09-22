@@ -262,23 +262,21 @@
         <h3 class="text-center mb-4">Konfirmasi Kedatangan</h3>
         <div class="row justify-content-center">
             <div class="col-lg-6">
-                <form id="rsvpForm" class="p-4 border rounded shadow-sm bg-white">
+                <form id="rsvpForm">
                     <div class="mb-3">
-                        <label class="form-label">Nama</label>
-                        <input type="text" id="inputNama" class="form-control" required maxlength="80" placeholder="Nama Anda">
+                        <input type="text" id="inputNama" class="form-control" required maxlength="80" placeholder="Nama">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Kehadiran</label>
-                        <select id="inputHadir" class="form-select">
+                        <textarea id="inputPesan" rows="3" class="form-control" maxlength="500" placeholder="Ucapan"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <select id="inputHadir" class="form-select" required>
+                            <option value="" disabled selected>Konfirmasi Kehadiran</option>
                             <option value="Hadir">Hadir</option>
                             <option value="Tidak Hadir">Tidak dapat hadir</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Pesan / Ucapan</label>
-                        <textarea id="inputPesan" rows="3" class="form-control" maxlength="500" placeholder="Tulis ucapan..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Konfirmasi</button>
+                    <button type="submit" class="btn btn-primary w-100">Kirim</button>
                 </form>
                 <div class="rsvp-results mt-3" aria-label="Daftar konfirmasi kedatangan">
                     <h4 class="rsvp-results-title">Ucapan &amp; Konfirmasi Kehadiran</h4>

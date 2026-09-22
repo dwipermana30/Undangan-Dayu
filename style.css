@@ -2380,3 +2380,37 @@ main > section:not(#doa),
     padding-right: 1.25rem;
   }
 }
+
+/* ================================================================
+   REVISI 3 (perbaikan diminta user):
+   1) Posisi teks pada slide Wedding Gift didorong turun (tidak center)
+      dan ukuran font teks gift diperkecil ~25%.
+   2) (Perubahan untuk animasi nama/desk pengantin dilakukan lewat
+      penambahan class "reveal" di HTML pada h5.pengantin-name dan
+      p.pengantin-desc, memakai animasi .reveal yang sudah ada di atas.)
+================================================================ */
+
+/* 1. Posisi teks Wedding Gift didorong turun dari tengah layar (mobile) */
+@media (max-width: 768px) {
+  #wedding-gift {
+    align-items: flex-start !important;
+    padding-top: 16dvh !important;
+  }
+}
+
+/* 1. Ukuran font teks gift dikurangi ~25% */
+#wedding-gift h4 {
+  font-size: clamp(1.43rem, 4.5vw, 1.73rem) !important; /* -25% dari clamp(1.9rem,6vw,2.3rem) */
+}
+
+#wedding-gift .gift-card .bank {
+  font-size: 0.75rem !important; /* -25% dari 1rem */
+}
+
+#wedding-gift .gift-card .accnum {
+  font-size: 1.16rem !important; /* -25% dari 1.55rem */
+}
+
+#wedding-gift .gift-card .accname {
+  font-size: 0.75rem !important; /* -25% dari 1rem */
+}

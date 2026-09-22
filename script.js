@@ -274,7 +274,7 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
                 const data = childSnapshot.val();
                 const item = document.createElement('div');
                 const isTidakHadir = data.kehadiran === 'Tidak Hadir';
-                item.className = 'comment-item ' + (isTidakHadir ? 'comment-tidak-hadir' : 'comment-hadir');
+                item.className = 'comment-item';
 
                 const header = document.createElement('div');
                 header.className = 'comment-header';
@@ -282,7 +282,7 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
                 name.className = 'comment-name';
                 name.textContent = typeof data.nama === 'string' ? data.nama : '';
                 const attendance = document.createElement('span');
-                attendance.className = 'badge-hadir';
+                attendance.className = 'badge-hadir ' + (isTidakHadir ? 'badge-no' : 'badge-yes');
                 attendance.textContent = isTidakHadir ? 'Tidak dapat hadir' : 'Hadir';
                 header.append(name, attendance);
 

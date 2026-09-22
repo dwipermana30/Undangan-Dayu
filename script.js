@@ -1,321 +1,495 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Undangan Pernikahan Gus Asdhi & Dayu Widya</title>
+(function () {
+    // --- 0. Konfigurasi & Inisialisasi Firebase ---
+    const firebaseConfig = {
+        apiKey: "AIzaSyCfVTqzeBvt5MuE-1cuuST_XfapPmwpV-s",
+        authDomain: "undangan-dwi-niken.firebaseapp.com",
+        databaseURL: "https://undangan-dwi-niken-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "undangan-dwi-niken",
+        storageBucket: "undangan-dwi-niken.firebasestorage.app",
+        messagingSenderId: "470175125544",
+        appId: "1:470175125544:web:4009100d97e64374d4251d"
+    };
 
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Forum&family=Pinyon+Script&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // --- Elemen UI Existing ---
+    const openBtn = document.getElementById("open-invitation-btn");
+    const coverPage = document.querySelector(".cover");
+    const mainContent = document.getElementById("main-content");
+    const music = document.getElementById("bg-music");
+    const heroBgImages = document.querySelectorAll(".hero-bg-img");
+    const pengantinCards = document.querySelectorAll("#pengantin .col-lg-6");
+    const galleryItems = document.querySelectorAll(".photo-gallery a");
+    const mapSection = document.querySelector("#location .map-responsive");
     
-    <link rel="preload" as="image" href="foto2.webp" fetchpriority="high">
-<link rel="preload" as="image" href="foto1.webp" fetchpriority="high">
+    let currentImageIndex = 0;
+    let slideshowTimeout;
 
-<link rel="preload" as="image" href="foto3.webp">
-<link rel="preload" as="image" href="foto4.webp">
-<link rel="preload" as="image" href="foto5.webp">
-<link rel="preload" as="image" href="foto6.webp">
-<link rel="preload" as="image" href="foto7.webp">
-<link rel="preload" as="image" href="foto8.webp">
-<link rel="preload" as="image" href="foto9.webp">
-<link rel="preload" as="image" href="foto10.webp">
-<link rel="preload" as="image" href="foto11.webp">
-<link rel="preload" as="image" href="foto12.webp">
-<link rel="preload" as="image" href="foto13.webp">
-<link rel="preload" as="image" href="foto14.webp">
-<link rel="preload" as="image" href="foto15.webp">
-<link rel="preload" as="image" href="foto16.webp">
+// --- 1. Hero Slideshow Logic (Fixed No-Flicker) ---
+// --- Update Fungsi showImage agar transisi blur lebih halus ---
+function showImage(nextIndex) {
+    const images = document.querySelectorAll(".hero-bg-img");
+    if (images.length === 0) return;
+    
+    const currentImg = images[currentImageIndex];
+    const nextImg = images[nextIndex];
 
-<link rel="preload" as="image" href="pengantin1.webp">
-<link rel="preload" as="image" href="pengantin2.webp">
-</head>
-<body>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
-
-<div class="cover">
-    <div class="background-container cover-bg"></div>
-    <div class="cover-content text-center">
-        <p class="cover-intro">We invite you to celebrate our wedding</p>
+    if (currentImg) {
+        currentImg.classList.remove("active");
+        currentImg.classList.add("exit"); 
         
-       <h1 class="cover-couple">
-          <span>Gus Asdhi</span>
-          <span class="cover-ampersand" aria-hidden="true">&amp;</span>
-          <span>Dayu Widya</span>
-        </h1>
+        setTimeout(() => {
+            currentImg.classList.remove("exit");
+        }, 1500); // Sesuai dengan durasi transition opacity di CSS
+    }
+    
+    if (nextImg) {
+        // Hapus class exit jika ada sisa dari putaran sebelumnya
+        nextImg.classList.remove("exit");
+        nextImg.classList.add("active");
+    }
+
+    currentImageIndex = nextIndex;
+}
+
+function startSlideshow() {
+    if (slideshowTimeout) clearInterval(slideshowTimeout); 
+    
+    const images = document.querySelectorAll(".hero-bg-img");
+    if (images.length > 1) {
+        // Set ke 10000ms (10 detik) agar sinkron dengan CSS
+        slideshowTimeout = setInterval(() => {
+            const nextIndex = (currentImageIndex + 1) % images.length;
+            showImage(nextIndex);
+        }, 10000); 
+    }
+}
+
+// --- 3. Buka Undangan Event (CONSOLIDATED & FIXED) ---
+if (openBtn) {
+    openBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        coverPage.classList.add("fade-out");
         
-       <button id="open-invitation-btn" class="btn btn-outline-light mt-4 custom-open-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-envelope me-2" viewBox="0 0 16 16">
-                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383z"/>
-            </svg>
-            Buka Undangan
-        </button>
-    </div>
-</div> <main id="main-content"> 
-    <header class="hero d-flex align-items-center">
-        <div class="hero-bg">
-            <img class="hero-bg-img active" src="foto2.webp" alt="foto1" loading="eager">
-            <img class="hero-bg-img" src="foto1.webp" alt="foto2" loading="lazy">
-            <img class="hero-bg-img" src="foto3.webp" alt="foto3" loading="lazy">
-            <img class="hero-bg-img" src="foto4.webp" alt="foto4" loading="lazy">
-            <img class="hero-bg-img" src="foto5.webp" alt="foto5" loading="lazy">
-            <img class="hero-bg-img" src="foto6.webp" alt="foto6" loading="lazy">
-            <img class="hero-bg-img" src="foto7.webp" alt="foto7" loading="lazy">
-            <img class="hero-bg-img" src="foto8.webp" alt="foto8" loading="lazy">
-            <img class="hero-bg-img" src="foto9.webp" alt="foto9" loading="lazy">
-            <img class="hero-bg-img" src="foto10.webp" alt="foto10" loading="lazy">
-            <img class="hero-bg-img" src="foto11.webp" alt="foto11" loading="lazy">
-            <img class="hero-bg-img" src="foto12.webp" alt="foto12" loading="lazy">
-            <img class="hero-bg-img" src="foto13.webp" alt="foto13" loading="lazy">
-            <img class="hero-bg-img" src="foto14.webp" alt="foto14" loading="lazy">
-            <img class="hero-bg-img" src="foto15.webp" alt="foto15" loading="lazy">
-            <img class="hero-bg-img" src="foto16.webp" alt="foto16" loading="lazy">
-        </div>
-        <div class="overlay"></div>
-        <div class="container">
-        <div class="row">
-            <div class="col-lg-6 hero-text text-center mx-auto">
-                <div class="countdown d-flex gap-3 justify-content-center" id="countdown">
-                    <div><span id="days">00</span><small>Days</small></div>
-                    <div><span id="hours">00</span><small>Hours</small></div>
-                    <div><span id="mins">00</span><small>Minutes</small></div>
-                    <div><span id="secs">00</span><small>Seconds</small></div>
-                </div>
-
-                <div class="mt-5">
-                    <a href="https://www.google.com/calendar/render?..." target="_blank" rel="noopener noreferrer" class="btn-save-date">
-                        🗓️ Save the Date
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>  <section id="ucapan" class="py-5 bg-muted">
-    <div class="container text-center">
-        <p class="weda-text reveal">
-            "Ya Tuhan Yang Maha Pengasih, anugrahkanlah kepada pasangan ini tanpa terpisahkan, panjang umur, semoga pernikahan ini dianugrahkan putra-putri dan cucu yang memberi penghiburan, tinggal di rumah yang penuh kebahagiaan."
-            <br>
-            <span class="weda-source mt-3">Reg Weda X. 85.42</span>
-        </p>
-    </div>
-</section>  
-<section id="doa" class="p-0"> 
-    <div class="doa-mobile-bg">
-        <div class="container text-center">
-            <p class="doa-text-top mb-3 reveal">Om Swastyastu</p>
-            <p class="doa-text-main reveal">Atas Asung Kertha Wara Nugraha Ida Sang Hyang Widhi Wasa/Tuhan Yang Maha Esa, Kami Bermaksud Mengundang Bapak/Ibu/Saudara/I Pada Upacara Manusa Yadnya Pawiwahan Putra Dan Putri Kami.</p>  
-        </div>
-    </div>
-</section>
-
-   <section id="pengantin" class="py-5 bg-muted">
-    <div class="container">
-        <div class="row text-center justify-content-center">
-            <div class="col-lg-6 mb-5">
-                <div class="pengantin-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="pengantin1.webp">
-                    <img src="pengantin1.webp" alt="Pengantin Pria" class="pengantin-img">
-                    <div class="pengantin-overlay">
-                        <h5 class="pengantin-name reveal">Ida Bagus Putu Asdhi Setiawan, S.E</h5>
-                        <p class="pengantin-desc reveal">Putra pertama dari <br> Ida Bagus Nyoman Dharmayadi & Ida Ayu Komang Astiari</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="pengantin-card" data-bs-toggle="modal" data-bs-target="#galleryModal" data-img="pengantin2.webp">
-                    <img src="pengantin2.webp" alt="Pengantin Wanita" class="pengantin-img">
-                    <div class="pengantin-overlay">
-                        <h5 class="pengantin-name reveal">Ida Ayu Nyoman Widyastini, S.Tr.Akt</h5>
-                        <p class="pengantin-desc reveal">Putri pertama dari <br>  Ida Bagus Ketut Mertha &  Ida Ayu Ketut Budawati, S.Ag</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-   <section id="details" class="py-5">
-    <div class="container text-center">
-        <p class="mb-4 reveal" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: var(--accent);">
-            Yang akan dilaksanakan pada:
-        </p>
+        // Ambil elemen gambar
+        const images = document.querySelectorAll(".hero-bg-img");
         
-        <div class="d-flex justify-content-center align-items-center mb-5 wedding-date-row reveal">
-            <div class="date-side">OKT</div>
-            <div class="date-divider"><div class="line"></div></div>
-            <div class="date-main">16</div>
-            <div class="date-divider"><div class="line"></div></div>
-            <div class="date-side">2026</div>
-        </div>
+        setTimeout(() => {
+            coverPage.style.display = "none";
+            mainContent.classList.add("fade-in");
+            document.body.style.overflow = "auto";
+            
+            // Pastikan Hero Height menyesuaikan (untuk mobile)
+            adjustHeroHeight();
 
-        <div class="row justify-content-center align-items-center time-row reveal">
-            <div class="col-5 col-md-3 time-box">
-                <h5>Natab</h5>
-                <p>08.00 - 12.00</p>
-                <p>WITA</p>
-            </div>
-            <div class="col-2 d-flex justify-content-center">
-                <div class="center-ornament"></div>
-            </div>
-            <div class="col-5 col-md-3 time-box">
-                <h5>Resepsi</h5>
-                <p>13.00 - Selesai</p>
-                <p>WITA</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section id="location" class="py-5">
-    <div class="container">
-        <div class="row text-center mb-4">
-            <div class="col">
-                <h2 class="section-title">Lokasi Acara</h2>
-                <p class="doa-text">Griya Budha Purnawati</p>
-                <p class="small text-muted">Desa Tusan, Kec. Banjarangkaran, Kab. Klungkung, Bali</p>
-            </div>
-        </div>
+            if (images.length > 0) {
+                // Reset semua ke kondisi awal sebelum mulai
+                currentImageIndex = 0;
+                images.forEach(img => img.classList.remove("active", "exit"));
+                // Aktifkan foto pertama
+                images[0].classList.add("active");
+                
+                // Jalankan slideshow setelah foto pertama muncul
+                startSlideshow(); 
+            }
+            
+            animateOnScroll(); 
+        }, 500);
 
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-               <div class="map-responsive shadow-sm mb-4" style="border-radius: 15px; overflow: hidden; position: relative;">
-    <iframe 
-         src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3005.3995686460835!2d115.36615657501324!3d-8.542971691500224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMzInMzQuNyJTIDExNcKwMjInMDcuNCJF!5e1!3m2!1sen!2sid!4v1789522718805!5m2!1sen!2sid"
-        width="100%" 
-        height="450" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin">
-    </iframe>
-</div>
-<div class="text-center">
-    <a href="https://www.google.com/maps?q=-8.542972,115.368722" target="_blank" rel="noopener noreferrer" class="btn-save-date" style="background-color: var(--accent); border: none; text-decoration: none; display: inline-block; padding: 12px 25px; border-radius: 30px; color: white;">
-    📍 Buka di Google Maps
-    </a>
-</div>
-            </div>
-        </div>
-    </div>
-</section>
-    <section class="container py-5 gallery">
-        <h2 class="text-center mb-4">Our Moments</h2>
-        <div class="photo-gallery">
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="0"><img src="foto1.webp" alt="foto1"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="1"><img src="foto2.webp" alt="foto2"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="2"><img src="foto3.webp" alt="foto3"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="3"><img src="foto4.webp" alt="foto4"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="4"><img src="foto5.webp" alt="foto5"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="5"><img src="foto6.webp" alt="foto6"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="6"><img src="foto7.webp" alt="foto7"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="7"><img src="foto8.webp" alt="foto8"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="8"><img src="foto9.webp" alt="foto9"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="9"><img src="foto10.webp" alt="foto10"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="10"><img src="foto11.webp" alt="foto11"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="11"><img src="foto12.webp" alt="foto12"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="12"><img src="foto13.webp" alt="foto13"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="13"><img src="foto14.webp" alt="foto14"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="14"><img src="foto15.webp" alt="foto15"></a>
-            <a href="#" data-bs-toggle="modal" data-bs-target="#galleryModal" data-index="15"><img src="foto16.webp" alt="foto16"></a>
-        </div>
-    </section>
+        if (music) {
+            music.play().catch(err => console.log("Autoplay dicegah browser"));
+        }
+    });
+}
+    
+   // --- 2. Scroll Trigger Logic ---
+function animateOnScroll() {
+    const windowHeight = window.innerHeight;
+    const revealElements = document.querySelectorAll(".reveal");
 
-    <section id="wedding-gift" class="py-5">
-    <div class="container">
-        <h4>Wedding Gift</h4>
-        <div class="gift-list">
-            <div class="gift-card gift-row">
-                <div class="gift-text">
-                    <div class="bank">Bank BCA</div>
-                    <div class="accnum">7730492175</div>
-                    <div class="accname">Ida Bagus Putu Asdhi Setiawan</div>
-                </div>
-                <button class="copyBtn" aria-label="Salin nomor rekening">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/>
-                        <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            </div>
-            <hr class="gift-divider">
-            <div class="gift-card gift-row">
-                <div class="gift-text">
-                    <div class="bank">Bank BCA</div>
-                    <div class="accnum">0403245779</div>
-                    <div class="accname">Ida Ayu Nyoman Widyastini</div>
-                </div>
-                <button class="copyBtn" aria-label="Salin nomor rekening">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                        <rect x="9" y="9" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/>
-                        <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            </div>
-            <hr class="gift-divider">
-        </div>
-    </div>
-</section>
+    // Efek Reveal Tanggal
+    revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowHeight - 50) {
+            el.classList.add("active");
+        }
+    });
 
-   <section id="rsvp" class="py-5">
-    <div class="container">
-        <h3 class="text-center mb-4">Konfirmasi Kedatangan</h3>
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <form id="rsvpForm">
-                    <div class="mb-3">
-                        <input type="text" id="inputNama" class="form-control" required maxlength="80" placeholder="Nama">
-                    </div>
-                    <div class="mb-3">
-                        <textarea id="inputPesan" rows="3" class="form-control" maxlength="500" placeholder="Ucapan"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <select id="inputHadir" class="form-select" required>
-                            <option value="" disabled selected>Konfirmasi Kehadiran</option>
-                            <option value="Hadir">Hadir</option>
-                            <option value="Tidak Hadir">Tidak dapat hadir</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Kirim</button>
-                </form>
-                <div class="rsvp-results mt-3" aria-label="Daftar konfirmasi kedatangan">
-                    <h4 class="rsvp-results-title">Ucapan &amp; Konfirmasi Kehadiran</h4>
-                    <div class="comment-container" aria-live="polite">
-                        <p class="comment-empty">Belum ada konfirmasi. Jadilah yang pertama mengirim ucapan.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-    <footer id="thanks" class="py-4 text-center">
-        <div class="thanks-content">
-            <p class="thanks-intro">Terima kasih atas doa dan kehadirannya</p>
-            <h2>Matur Suksma</h2>
-            <p class="thanks-names">Gus Asdhi &amp; Dayu Widya</p>
-        </div>
-    </footer>
-</main>
+    // Efek Animasi Map
+    if (mapSection && !mapSection.classList.contains("animated")) {
+        const rect = mapSection.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+            mapSection.style.opacity = "1";
+            mapSection.style.transform = "translateY(0)";
+            mapSection.classList.add("animated");
+        }
+    }
 
-<audio id="bg-music" loop>
-    <source src="music1.mp3" type="audio/mpeg">
-</audio>
-<div class="music-btn" id="music-btn">🎵</div>
+    // Efek Animasi Kartu Pengantin
+    pengantinCards.forEach((card) => {
+        if (card.classList.contains("animated")) return;
+        const rect = card.getBoundingClientRect();
+        if (rect.top < windowHeight - 100) {
+            card.classList.add("animated");
+        }
+    });
 
-<div class="modal fade" id="galleryModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content bg-transparent border-0">
-            <div class="modal-body text-center p-0 position-relative">
-                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" style="z-index: 1060;"></button>
-                <button class="modal-nav-btn prev-btn" id="prevGalleryBtn">‹</button>
-                <img src="" class="img-fluid rounded" id="galleryModalImage">
-                <button class="modal-nav-btn next-btn" id="nextGalleryBtn">›</button>
-            </div>
-        </div>
-    </div>
-</div>
+    // Efek Animasi Gallery
+    galleryItems.forEach((item) => {
+        if (item.classList.contains("animated")) return;
+        const rect = item.getBoundingClientRect();
+        if (rect.top < windowHeight - 50) {
+            item.classList.add("animated");
+        }
+    });
+}
+  window.addEventListener("scroll", animateOnScroll, { passive: true });
+    window.addEventListener("resize", animateOnScroll);
+    // Pada mobile, scroll terjadi di #main-content (bukan lagi di window).
+    
+if (mainContent) {
+    mainContent.addEventListener("scroll", animateOnScroll, { passive: true });
+}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
+// Galeri memiliki area scroll sendiri di mobile. Pantau scroll ini juga
+// supaya foto yang baru masuk ke layar langsung diberi animasi tampil.
+document.querySelectorAll(".photo-gallery").forEach((gallery) => {
+    gallery.addEventListener("scroll", animateOnScroll, { passive: true });
+});
+    // --- 3. Buka Undangan Event ---
+   if (openBtn) {
+    openBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        coverPage.classList.add("fade-out");
+        
+        // Ambil semua gambar hero
+        const images = document.querySelectorAll(".hero-bg-img");
+        
+        setTimeout(() => {
+            coverPage.style.display = "none";
+            mainContent.classList.add("fade-in");
+            document.body.style.overflow = "auto";
+            
+            // FIX: Paksa foto pertama langsung 'active' agar mulai zoom-out dari 1.15 ke 1
+            if (images.length > 0) {
+                images[0].classList.add("active");
+            }
+            
+            startSlideshow(); 
+            animateOnScroll(); 
+        }, 500);
+
+        if (music) {
+            music.play().catch(err => console.log("Autoplay dicegah browser"));
+        }
+    });
+}
+
+    // --- 4. Countdown Timer ---
+    const weddingDate = new Date("2026-10-16T08:00:00+08:00").getTime();
+    const countdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = weddingDate - now;
+
+        if (diff > 0) {
+            const d = document.getElementById("days");
+            const h = document.getElementById("hours");
+            const m = document.getElementById("mins");
+            const s = document.getElementById("secs");
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            if(d) d.textContent = days.toString().padStart(2, '0');
+            if(h) h.textContent = hours.toString().padStart(2, '0');
+            if(m) m.textContent = mins.toString().padStart(2, '0');
+            if(s) s.textContent = secs.toString().padStart(2, '0');
+        } else {
+            const countdownContainer = document.querySelector(".countdown");
+            if(countdownContainer) countdownContainer.innerHTML = "<h4>Acara Sedang Berlangsung</h4>";
+            clearInterval(countdownInterval);
+        }
+    }, 1000);
+
+    // --- 5. Logika RSVP (Firebase Realtime) ---
+    const rsvpForm = document.getElementById('rsvpForm');
+    if(rsvpForm) {
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nama = document.getElementById('inputNama').value.trim();
+            const kehadiran = document.getElementById('inputHadir').value;
+            const pesan = document.getElementById('inputPesan').value.trim();
+            const waktu = new Date().getTime();
+
+            if (!nama || nama.length > 80 || pesan.length > 500 || !kehadiran) {
+                Swal.fire({
+                    title: 'Data tidak valid',
+                    text: 'Nama wajib diisi (maks. 80 karakter), konfirmasi kehadiran wajib dipilih, dan pesan maksimal 500 karakter.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+                return;
+            }
+
+            const newPostRef = database.ref('ucapan').push();
+            newPostRef.set({
+                nama: nama,
+                kehadiran: kehadiran,
+                pesan: pesan,
+                waktu: waktu
+            }).then(() => {
+    rsvpForm.reset(); 
+    // Notifikasi Custom yang Elegan
+        Swal.fire({
+        title: 'Sukses!',
+        text: 'Terima kasih, ucapan Anda telah tersimpan.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+        confirmButtonColor: '#8d7a5f', // Warna disesuaikan dengan tema Griya Taksu
+        background: '#ffffff',
+        customClass: {
+            title: 'font-forum', // Jika ingin menyesuaikan font
+            popup: 'rounded-4'
+            }
+        });
+        }).catch((error) => {
+                console.error("Gagal menyimpan:", error);
+            });
+        });
+    }
+
+    // Tampilkan Ucapan Realtime
+    const commentContainer = document.querySelector('.comment-container');
+    if(commentContainer) {
+        database.ref('ucapan').orderByChild('waktu').limitToLast(100).on('value', (snapshot) => {
+            commentContainer.replaceChildren();
+            let hasComments = false;
+            snapshot.forEach((childSnapshot) => {
+                hasComments = true;
+                const data = childSnapshot.val();
+                const item = document.createElement('div');
+                const isTidakHadir = data.kehadiran === 'Tidak Hadir';
+                item.className = 'comment-item ' + (isTidakHadir ? 'comment-tidak-hadir' : 'comment-hadir');
+
+                const header = document.createElement('div');
+                header.className = 'comment-header';
+                const name = document.createElement('span');
+                name.className = 'comment-name';
+                name.textContent = typeof data.nama === 'string' ? data.nama : '';
+                const attendance = document.createElement('span');
+                attendance.className = 'badge-hadir';
+                attendance.textContent = isTidakHadir ? 'Tidak dapat hadir' : 'Hadir';
+                header.append(name, attendance);
+
+                const message = document.createElement('p');
+                message.className = 'comment-text';
+                message.textContent = typeof data.pesan === 'string' ? data.pesan : '';
+                item.append(header, message);
+                commentContainer.prepend(item);
+
+                const divider = document.createElement('hr');
+                divider.className = 'comment-divider';
+                commentContainer.insertBefore(divider, item.nextSibling);
+            });
+
+            if (!hasComments) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.className = 'comment-empty';
+                emptyMessage.textContent = 'Belum ada konfirmasi. Jadilah yang pertama mengirim ucapan.';
+                commentContainer.append(emptyMessage);
+            }
+        });
+    }
+
+    // --- 6. Gallery Modal & Navigation ---
+    // Ambil urutan langsung dari thumbnail HTML agar navigasi modal
+    // selalu sama dengan urutan pada bagian "Our Moments".
+    const galleryImages = Array.from(
+        document.querySelectorAll('.photo-gallery img'),
+        (image) => image.getAttribute('src')
+    ).filter(Boolean);
+    let currentGalleryIndex = 0;
+    const modalImg = document.getElementById('galleryModalImage');
+    const nextBtn = document.getElementById('nextGalleryBtn');
+    const prevBtn = document.getElementById('prevGalleryBtn');
+
+    document.querySelectorAll('.photo-gallery a').forEach((item, index) => {
+        item.addEventListener('click', function() {
+            currentGalleryIndex = index;
+            if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+            if(prevBtn) prevBtn.style.display = 'block';
+            if(nextBtn) nextBtn.style.display = 'block';
+        });
+    });
+
+    document.querySelectorAll('.pengantin-card').forEach(item => {
+        item.addEventListener('click', function() {
+            const imgSrc = this.getAttribute('data-img');
+            if(modalImg) modalImg.src = imgSrc;
+            if(prevBtn) prevBtn.style.display = 'none';
+            if(nextBtn) nextBtn.style.display = 'none';
+        });
+    });
+
+    if(nextBtn) nextBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex + 1) % galleryImages.length;
+        if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+    });
+
+    if(prevBtn) prevBtn.addEventListener('click', () => {
+        currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length;
+        if(modalImg) modalImg.src = galleryImages[currentGalleryIndex];
+    });
+
+    // --- 7. Music Toggle & Copy Bank Logic ---
+    const musicBtn = document.getElementById("music-btn");
+    if (musicBtn && music) {
+        musicBtn.addEventListener("click", () => {
+            if (music.paused) { 
+                music.play(); 
+                musicBtn.textContent = "🎵"; 
+            } else { 
+                music.pause(); 
+                musicBtn.textContent = "🔇"; 
+            }
+        });
+    }
+
+    document.querySelectorAll('.copyBtn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+        const accNum = btn.closest('.gift-card')?.querySelector('.accnum')?.textContent;
+        if (accNum) {
+            navigator.clipboard.writeText(accNum.trim()).then(() => {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'No. Rekening tersalin!',
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                });
+            });
+        }
+    });
+});
+    function adjustHeroHeight() {
+    if (window.innerWidth <= 768) {
+        const vh = window.innerHeight;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.style.height = `${vh}px`;
+        }
+    }
+}
+
+// Jalankan saat load dan saat buka undangan
+window.addEventListener('load', adjustHeroHeight);
+// Panggil fungsi ini juga di dalam event listener openBtn.click
+openBtn.addEventListener("click", function(e) {
+    // ... kode yang sudah ada ...
+    adjustHeroHeight(); // Tambahkan ini
+});
+})();
+
+/* ================================================================
+   FINAL: satu gesture mobile berpindah satu slide + animasi pengantin.
+================================================================ */
+(function () {
+  if (!window.matchMedia('(max-width: 768px)').matches) return;
+
+  const main = document.getElementById('main-content');
+  if (!main) return;
+
+  const slides = () => Array.from(main.children).flatMap((element) => {
+    if (element.id === 'pengantin') {
+      return Array.from(element.querySelectorAll('.col-lg-6'));
+    }
+    return ['HEADER', 'SECTION', 'FOOTER'].includes(element.tagName) ? [element] : [];
+  });
+
+  const topOf = (element) =>
+    element.getBoundingClientRect().top - main.getBoundingClientRect().top + main.scrollTop;
+
+  const currentSlideIndex = (items) => items.reduce((nearest, item, index) =>
+    Math.abs(topOf(item) - main.scrollTop) < Math.abs(topOf(items[nearest]) - main.scrollTop)
+      ? index
+      : nearest, 0);
+
+  const go = (direction) => {
+    if (document.querySelector('.modal.show')) return;
+    const items = slides();
+    const nextIndex = Math.max(0, Math.min(items.length - 1, currentSlideIndex(items) + direction));
+    const next = items[nextIndex];
+    if (!next) return;
+    next.classList.add('animated');
+    main.scrollTo({ top: topOf(next), behavior: 'smooth' });
+  };
+
+  /* Kedua pengantin diberi animasi saat benar-benar terlihat. */
+  const cards = document.querySelectorAll('#pengantin .col-lg-6');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) entry.target.classList.add('animated');
+    });
+  }, { root: main, threshold: 0.35 });
+  cards.forEach((card) => observer.observe(card));
+
+  let startY = 0;
+  let startedInGallery = false;
+  main.addEventListener('touchstart', (event) => {
+    startY = event.touches[0].clientY;
+    // .comment-container (hasil ucapan/konfirmasi) diperlakukan sama seperti
+    // .photo-gallery: area ini punya scroll sendiri, jadi jangan langsung
+    // dianggap sebagai gesture pindah slide di sini. Penanganannya dengan
+    // deteksi posisi ujung atas/bawah ada di listener khusus di bawah.
+    startedInGallery = Boolean(event.target.closest('.photo-gallery, .comment-container'));
+  }, { passive: true });
+
+  main.addEventListener('touchend', (event) => {
+    const distance = startY - event.changedTouches[0].clientY;
+    if (Math.abs(distance) < 45 || startedInGallery) return;
+    go(distance > 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* Scroll normal di galeri; swipe pada ujung galeri pindah halaman. */
+  document.querySelectorAll('.photo-gallery').forEach((gallery) => {
+    let galleryStartY = 0;
+    gallery.addEventListener('touchstart', (event) => {
+      galleryStartY = event.touches[0].clientY;
+    }, { passive: true });
+    gallery.addEventListener('touchend', (event) => {
+      const distance = galleryStartY - event.changedTouches[0].clientY;
+      if (Math.abs(distance) < 45) return;
+      const atTop = gallery.scrollTop <= 1;
+      const atBottom = gallery.scrollTop + gallery.clientHeight >= gallery.scrollHeight - 1;
+      if ((distance < 0 && atTop) || (distance > 0 && atBottom)) {
+        go(distance > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  });
+
+  /* Scroll normal di daftar hasil ucapan & konfirmasi kehadiran; swipe
+     hanya pindah ke slide berikutnya/sebelumnya kalau sudah berada persis
+     di ujung atas atau ujung bawah daftar tersebut. */
+  document.querySelectorAll('.comment-container').forEach((container) => {
+    let containerStartY = 0;
+    container.addEventListener('touchstart', (event) => {
+      containerStartY = event.touches[0].clientY;
+    }, { passive: true });
+    container.addEventListener('touchend', (event) => {
+      const distance = containerStartY - event.changedTouches[0].clientY;
+      if (Math.abs(distance) < 45) return;
+      const atTop = container.scrollTop <= 1;
+      const atBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
+      if ((distance < 0 && atTop) || (distance > 0 && atBottom)) {
+        go(distance > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  });
+})();

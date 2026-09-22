@@ -1991,14 +1991,10 @@ main > section:not(#doa),
   content: "";
   position: absolute;
   z-index: 0;
-  inset: -14px;
-  background-image:
-    linear-gradient(120deg, rgba(20, 14, 10, 0.62), rgba(20, 14, 10, 0.42)),
-    url("gift.webp");
+  inset: 0;
+  background-image: url("gift.webp");
   background-size: cover;
   background-position: center;
-  filter: blur(1px);
-  transform: scale(1.02);
 }
 
 #wedding-gift .container {
@@ -2419,10 +2415,4 @@ main > section:not(#doa),
 
 #wedding-gift .gift-card .accname {
   font-size: 0.75rem !important; /* -25% dari 1rem */
-}
-
-/* Hilangkan efek blur pada foto background Wedding Gift */
-#wedding-gift::before {
-  filter: none !important;
-  transform: scale(1) !important;
 }

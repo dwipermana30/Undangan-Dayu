@@ -1168,239 +1168,6 @@ h2, h3, h4, h5 {
     filter: none;
   }
 }
-#doa .doa-mobile-bg {
-  min-height: clamp(32rem, 72vh, 46rem);
-  padding: 4rem 1.25rem;
-  display: grid !important;
-  place-items: center;
-  background-image:
-    linear-gradient(120deg, rgba(25, 15, 10, 0.72), rgba(25, 15, 10, 0.48)),
-    url("fotodoa.webp") !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  color: #fff !important;
-}
-
-#doa .doa-mobile-bg .container {
-  width: min(100%, 44rem);
-  padding: clamp(1.75rem, 4vw, 3rem);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 1rem;
-  background: rgba(21, 13, 9, 0.22);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-#doa .doa-text-top {
-  margin-bottom: 1rem !important;
-  color: #fff !important;
-  font-family: 'Pinyon Script', cursive;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55) !important;
-}
-
-#doa .doa-text-main {
-  margin: 0;
-  color: #fff !important;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-  font-weight: 600;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72) !important;
-}
-
-.photo-gallery {
-  perspective: none;
-}
-
-.photo-gallery a {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(24px) scale(0.985);
-  filter: blur(4px);
-  will-change: opacity, transform, filter;
-}
-
-.photo-gallery a.animated {
-  visibility: visible;
-  animation: galleryReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes galleryReveal {
-  from { opacity: 0; transform: translateY(24px) scale(0.985); filter: blur(4px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
-.photo-gallery a.animated:nth-child(1)  { animation-delay: 0.00s; }
-.photo-gallery a.animated:nth-child(2)  { animation-delay: 0.08s; }
-.photo-gallery a.animated:nth-child(3)  { animation-delay: 0.16s; }
-.photo-gallery a.animated:nth-child(4)  { animation-delay: 0.24s; }
-.photo-gallery a.animated:nth-child(5)  { animation-delay: 0.32s; }
-.photo-gallery a.animated:nth-child(6)  { animation-delay: 0.40s; }
-.photo-gallery a.animated:nth-child(7)  { animation-delay: 0.48s; }
-.photo-gallery a.animated:nth-child(8)  { animation-delay: 0.56s; }
-.photo-gallery a.animated:nth-child(9)  { animation-delay: 0.64s; }
-.photo-gallery a.animated:nth-child(10) { animation-delay: 0.72s; }
-.photo-gallery a.animated:nth-child(11) { animation-delay: 0.80s; }
-.photo-gallery a.animated:nth-child(12) { animation-delay: 0.88s; }
-.photo-gallery a.animated:nth-child(13) { animation-delay: 0.96s; }
-.photo-gallery a.animated:nth-child(14) { animation-delay: 1.04s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .photo-gallery a,
-  .photo-gallery a.animated {
-    animation: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    filter: none;
-  }
-}
-
-:root {
-  --muted: #f3ede6;
-  --accent: #8a6248;
-  --text: #30231c;
-}
-
-body,
-.bg-light {
-  background-color: var(--muted) !important;
-}
-
-#doa .doa-mobile-bg {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background: none !important;
-}
-
-#doa .doa-mobile-bg::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: -14px;
-  background-image:
-    linear-gradient(120deg, rgba(36, 22, 15, 0.68), rgba(67, 42, 29, 0.50)),
-    url("fotodoa.webp");
-  background-size: cover;
-  background-position: center;
-  filter: blur(5px);
-  transform: scale(1.04);
-}
-
-#doa .doa-mobile-bg .container {
-  position: relative;
-  z-index: 1;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-#doa .doa-mobile-bg {
-  min-height: clamp(32rem, 72vh, 46rem);
-  padding: 4rem 1.25rem;
-  display: grid !important;
-  place-items: center;
-  background-image:
-    linear-gradient(120deg, rgba(25, 15, 10, 0.72), rgba(25, 15, 10, 0.48)),
-    url("fotodoa.webp") !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  color: #fff !important;
-}
-
-#doa .doa-mobile-bg .container {
-  width: min(100%, 44rem);
-  padding: clamp(1.75rem, 4vw, 3rem);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 1rem;
-  background: rgba(21, 13, 9, 0.22);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-#doa .doa-text-top {
-  margin-bottom: 1rem !important;
-  color: #fff !important;
-  font-family: 'Pinyon Script', cursive;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55) !important;
-}
-
-#doa .doa-text-main {
-  margin: 0;
-  color: #fff !important;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-  font-weight: 600;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72) !important;
-}
-
-/* --- Galeri: muncul lembut, tanpa efek ayunan --- */
-.photo-gallery {
-  perspective: none;
-}
-
-.photo-gallery a {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(24px) scale(0.985);
-  filter: blur(4px);
-  will-change: opacity, transform, filter;
-}
-
-.photo-gallery a.animated {
-  visibility: visible;
-  animation: galleryReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes galleryReveal {
-  from { opacity: 0; transform: translateY(24px) scale(0.985); filter: blur(4px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
-.photo-gallery a.animated:nth-child(1)  { animation-delay: 0.00s; }
-.photo-gallery a.animated:nth-child(2)  { animation-delay: 0.08s; }
-.photo-gallery a.animated:nth-child(3)  { animation-delay: 0.16s; }
-.photo-gallery a.animated:nth-child(4)  { animation-delay: 0.24s; }
-.photo-gallery a.animated:nth-child(5)  { animation-delay: 0.32s; }
-.photo-gallery a.animated:nth-child(6)  { animation-delay: 0.40s; }
-.photo-gallery a.animated:nth-child(7)  { animation-delay: 0.48s; }
-.photo-gallery a.animated:nth-child(8)  { animation-delay: 0.56s; }
-.photo-gallery a.animated:nth-child(9)  { animation-delay: 0.64s; }
-.photo-gallery a.animated:nth-child(10) { animation-delay: 0.72s; }
-.photo-gallery a.animated:nth-child(11) { animation-delay: 0.80s; }
-.photo-gallery a.animated:nth-child(12) { animation-delay: 0.88s; }
-.photo-gallery a.animated:nth-child(13) { animation-delay: 0.96s; }
-.photo-gallery a.animated:nth-child(14) { animation-delay: 1.04s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .photo-gallery a,
-  .photo-gallery a.animated {
-    animation: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    filter: none;
-  }
-}
-
-/* --- Revisi palet undangan dan section doa ---
-   Blok ini harus tetap berada PALING BAWAH pada style.css. */
 :root {
   --muted: #e4e6d8; /* sage muda: menyatu dengan hijau, emas, dan marun pada foto */
   --accent: #8a6248;
@@ -1413,7 +1180,6 @@ body,
   background-color: var(--muted) !important;
 }
 
-/* Samakan latar seluruh halaman. #doa dikecualikan karena memakai foto sendiri. */
 #main-content,
 main > section:not(#doa),
 #ucapan,
@@ -1424,7 +1190,6 @@ main > section:not(#doa),
   background-color: var(--muted) !important;
 }
 
-/* Hilangkan bingkai: teks tampil langsung di atas foto. */
 #doa .doa-mobile-bg {
   position: relative;
   isolation: isolate;
@@ -1438,11 +1203,11 @@ main > section:not(#doa),
   z-index: 0;
   inset: -14px;
   background-image:
-    linear-gradient(120deg, rgba(36, 22, 15, 0.68), rgba(67, 42, 29, 0.50)),
+    linear-gradient(120deg, rgba(36, 22, 15, 0.64), rgba(67, 42, 29, 0.46)),
     url("fotodoa.webp");
   background-size: cover;
   background-position: center;
-  filter: blur(5px);
+  filter: blur(2px);
   transform: scale(1.04);
 }
 
@@ -1456,61 +1221,6 @@ main > section:not(#doa),
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-}
-.hero .countdown {
-  display: inline-flex !important;
-  width: auto;
-  max-width: calc(100vw - 2.5rem);
-  margin: 0 auto 2rem;
-  gap: 0 !important;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.32);
-  border-radius: 999px;
-  background: rgba(27, 18, 14, 0.18);
-  box-shadow: 0 8px 24px rgba(20, 12, 8, 0.10);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-.hero .countdown div {
-  min-width: 0;
-  flex: 0 1 auto;
-  padding: 0.5rem clamp(0.55rem, 2.4vw, 1.1rem);
-  border: 0;
-  border-right: 1px solid rgba(255, 255, 255, 0.26);
-  border-radius: 0;
-  background: transparent !important;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.hero .countdown div:last-child {
-  border-right: 0;
-}
-
-.hero .countdown span {
-  color: #fff !important;
-  font-family: 'Forum', serif;
-  font-size: clamp(1.45rem, 5vw, 2rem);
-  font-weight: 400;
-  line-height: 1;
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.42);
-}
-
-.hero .countdown small {
-  display: block;
-  margin-top: 0.28rem;
-  color: rgba(255, 255, 255, 0.88) !important;
-  font-size: clamp(0.48rem, 1.8vw, 0.62rem);
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-shadow: none;
-}
-
-@media (max-width: 360px) {
-  .hero .countdown div {
-    padding-inline: 0.42rem;
-  }
 }
 .hero .countdown {
   display: inline-flex !important;
@@ -1573,7 +1283,6 @@ main > section:not(#doa),
   text-shadow: none;
 }
 
-/* Tombol lebih ringan agar tidak mengambil fokus dari slideshow. */
 .custom-open-btn,
 .hero .btn-save-date {
   width: auto;
@@ -1593,161 +1302,6 @@ main > section:not(#doa),
     padding-inline: 0.42rem;
   }
 }
-#doa .doa-mobile-bg {
-  min-height: clamp(32rem, 72vh, 46rem);
-  padding: 4rem 1.25rem;
-  display: grid !important;
-  place-items: center;
-  background-image:
-    linear-gradient(120deg, rgba(25, 15, 10, 0.72), rgba(25, 15, 10, 0.48)),
-    url("fotodoa.webp") !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  color: #fff !important;
-}
-
-#doa .doa-mobile-bg .container {
-  width: min(100%, 44rem);
-  padding: clamp(1.75rem, 4vw, 3rem);
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 1rem;
-  background: rgba(21, 13, 9, 0.22);
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-}
-
-#doa .doa-text-top {
-  margin-bottom: 1rem !important;
-  color: #fff !important;
-  font-family: 'Pinyon Script', cursive;
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.55) !important;
-}
-
-#doa .doa-text-main {
-  margin: 0;
-  color: #fff !important;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
-  font-weight: 600;
-  line-height: 1.75;
-  letter-spacing: 0.01em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72) !important;
-}
-
-/* --- Galeri: muncul lembut, tanpa efek ayunan --- */
-.photo-gallery {
-  perspective: none;
-}
-
-.photo-gallery a {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(24px) scale(0.985);
-  filter: blur(4px);
-  will-change: opacity, transform, filter;
-}
-
-.photo-gallery a.animated {
-  visibility: visible;
-  animation: galleryReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes galleryReveal {
-  from { opacity: 0; transform: translateY(24px) scale(0.985); filter: blur(4px); }
-  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-}
-
-.photo-gallery a.animated:nth-child(1)  { animation-delay: 0.00s; }
-.photo-gallery a.animated:nth-child(2)  { animation-delay: 0.08s; }
-.photo-gallery a.animated:nth-child(3)  { animation-delay: 0.16s; }
-.photo-gallery a.animated:nth-child(4)  { animation-delay: 0.24s; }
-.photo-gallery a.animated:nth-child(5)  { animation-delay: 0.32s; }
-.photo-gallery a.animated:nth-child(6)  { animation-delay: 0.40s; }
-.photo-gallery a.animated:nth-child(7)  { animation-delay: 0.48s; }
-.photo-gallery a.animated:nth-child(8)  { animation-delay: 0.56s; }
-.photo-gallery a.animated:nth-child(9)  { animation-delay: 0.64s; }
-.photo-gallery a.animated:nth-child(10) { animation-delay: 0.72s; }
-.photo-gallery a.animated:nth-child(11) { animation-delay: 0.80s; }
-.photo-gallery a.animated:nth-child(12) { animation-delay: 0.88s; }
-.photo-gallery a.animated:nth-child(13) { animation-delay: 0.96s; }
-.photo-gallery a.animated:nth-child(14) { animation-delay: 1.04s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .photo-gallery a,
-  .photo-gallery a.animated {
-    animation: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    filter: none;
-  }
-}
-
-/* --- Revisi palet undangan dan section doa ---
-   Blok ini harus tetap berada PALING BAWAH pada style.css. */
-:root {
-  --muted: #e4e6d8; /* sage muda: menyatu dengan hijau, emas, dan marun pada foto */
-  --accent: #8a6248;
-  --text: #30231c;
-}
-
-body,
-.bg-light,
-.gallery {
-  background-color: var(--muted) !important;
-}
-
-/* Samakan latar seluruh halaman. #doa dikecualikan karena memakai foto sendiri. */
-#main-content,
-main > section:not(#doa),
-#ucapan,
-#pengantin,
-#details,
-#location,
-#rsvp {
-  background-color: var(--muted) !important;
-}
-
-/* Hilangkan bingkai: teks tampil langsung di atas foto. */
-#doa .doa-mobile-bg {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background: none !important;
-}
-
-#doa .doa-mobile-bg::before {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: -14px;
-  background-image:
-    linear-gradient(120deg, rgba(36, 22, 15, 0.64), rgba(67, 42, 29, 0.46)),
-    url("fotodoa.webp");
-  background-size: cover;
-  background-position: center;
-  filter: blur(2px);
-  transform: scale(1.04);
-}
-
-#doa .doa-mobile-bg .container {
-  position: relative;
-  z-index: 1;
-  padding: clamp(1.5rem, 4vw, 2.5rem);
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-/* Tempelkan PALING BAWAH pada style.css. */
-
-/* Tombol cover mengikuti isi teks, tidak melebar satu layar. */
 .cover .custom-open-btn {
   align-self: center;
   display: inline-flex !important;
@@ -1763,12 +1317,10 @@ main > section:not(#doa),
   line-height: 1.2;
 }
 
-/* Jarak bawah nama agar bingkai tombol tidak bertumpuk dengan teks. */
 .cover .cover-couple {
   margin-bottom: 0 !important;
 }
 
-/* Save the Date berada tepat di atas countdown di bawah slideshow. */
 .hero .hero-text > .mt-5 {
   position: absolute;
   z-index: 20;
@@ -1784,9 +1336,6 @@ main > section:not(#doa),
   padding: 0.58rem 1.15rem !important;
   font-size: clamp(0.78rem, 2.3vw, 0.92rem) !important;
 }
-/* Tempelkan PALING BAWAH pada style.css. */
-
-/* Intro ringan dan berjarak seperti contoh. */
 .cover .cover-intro {
   margin-bottom: 1.15rem;
   color: rgba(255, 255, 255, 0.94);
@@ -1799,7 +1348,6 @@ main > section:not(#doa),
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.38);
 }
 
-/* Nama: serif klasik, lebih kecil, dan proporsional. */
 .cover .cover-couple {
   gap: 0.02em;
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -1821,9 +1369,6 @@ main > section:not(#doa),
     font-size: clamp(2.15rem, 9vw, 2.7rem);
   }
 }
-/* Tempelkan PALING BAWAH pada style.css. */
-
-/* --- Cover: konten berada di bagian bawah foto --- */
 .cover {
   align-items: flex-end;
   padding-bottom: clamp(2.5rem, 8vh, 5rem);
@@ -1840,7 +1385,6 @@ main > section:not(#doa),
     padding: 1.5rem 1.25rem calc(9dvh + env(safe-area-inset-bottom));
   }
 
-  /* --- Undangan setelah dibuka: swipe satu section per layar --- */
   body {
     overflow: hidden !important;
   }
@@ -1861,7 +1405,6 @@ main > section:not(#doa),
     scroll-snap-stop: always;
   }
 
-  /* Galeri berisi banyak foto; tetap bisa digulir normal di dalam section-nya. */
   #main-content > .gallery,
   #main-content > section.gallery {
     min-height: 100dvh;
@@ -1928,7 +1471,6 @@ main > section:not(#doa),
     scroll-snap-stop: always !important;
   }
 
-  /* Ayat/ucapan berada tepat di tengah layar. */
   #ucapan {
     display: flex !important;
     align-items: center !important;
@@ -1940,7 +1482,6 @@ main > section:not(#doa),
     width: 100%;
   }
 
-  /* Bagian doa pada foto juga center horizontal dan vertikal. */
   #doa,
   #doa .doa-mobile-bg {
     height: 100dvh !important;
@@ -1958,7 +1499,6 @@ main > section:not(#doa),
     width: 100%;
   }
 
-  /* Dua pengantin: mutlak satu kartu = satu layar. */
   #pengantin {
     height: 200dvh !important;
     min-height: 200dvh !important;
@@ -2008,7 +1548,6 @@ main > section:not(#doa),
     object-fit: contain;
   }
 
-  /* Animasi asli tetap dipakai: kartu masuk dari kiri/kanan saat slide terlihat. */
   #pengantin .col-lg-6 .pengantin-card {
     opacity: 0;
     pointer-events: none;
@@ -2031,16 +1570,12 @@ main > section:not(#doa),
   }
 }
 
-/* ================================================================
-   FINAL: galeri scroll internal + satu pengantin per slide (mobile).
-================================================================ */
 @media (max-width: 768px) {
   #main-content,
   #main-content.fade-in {
     scroll-snap-type: y mandatory !important;
   }
 
-  /* Hanya setiap kartu pengantin yang menjadi titik snap. */
   #main-content > #pengantin {
     scroll-snap-align: none !important;
     scroll-snap-stop: normal !important;
@@ -2071,7 +1606,6 @@ main > section:not(#doa),
     pointer-events: auto;
   }
 
-  /* Galeri tetap satu slide; foto dapat di-scroll di area galeri saja. */
   #main-content > section.gallery {
     display: flex !important;
     flex-direction: column;
@@ -2109,19 +1643,13 @@ main > section:not(#doa),
   }
 }
 
-/* ================================================================
-   FINAL: perbaikan mobile untuk galeri, RSVP, dan pemusatan section.
-   Aturan pemusatan di bawah ini hanya berlaku pada layar mobile.
-================================================================ */
 @media (max-width: 768px) {
-  /* Waktu Pelaksanaan dipusatkan khusus mobile. */
   #details .time-row {
     width: min(100%, 34rem);
     margin-right: auto;
     margin-left: auto;
   }
 
-  /* Wedding Gift dipusatkan khusus mobile. */
   #wedding-gift {
     display: flex !important;
     align-items: center;
@@ -2132,7 +1660,6 @@ main > section:not(#doa),
     width: 100%;
   }
 
-  /* Our Moments: foto besar dan area grid dapat digulir sendiri. */
   #main-content > section.gallery .photo-gallery {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.85rem;
@@ -2167,7 +1694,6 @@ main > section:not(#doa),
     border-radius: 999px;
   }
 
-  /* Form dan hasil konfirmasi berada di satu section. */
   #main-content > #rsvp {
     display: flex !important;
     align-items: stretch;
@@ -2259,11 +1785,7 @@ main > section:not(#doa),
 .photo-gallery a.animated:nth-child(15) { animation-delay: 1.12s; }
 .photo-gallery a.animated:nth-child(16) { animation-delay: 1.20s; }
 
-/* ================================================================
-   FINAL: tanggal acara lebih tegas di mobile dan slide penutup.
-================================================================ */
 @media (max-width: 768px) {
-  /* Slide tanggal acara: teks besar dan seluruh komponen terpusat. */
   #details {
     display: flex !important;
     align-items: center;
@@ -2304,7 +1826,6 @@ main > section:not(#doa),
     font-size: clamp(1.05rem, 3.9vw, 1.25rem) !important;
   }
 
-  /* Slide terakhir. Unggah foto17.webp ke folder yang sama dengan index.html. */
   #thanks {
     position: relative;
     isolation: isolate;
@@ -2352,5 +1873,342 @@ main > section:not(#doa),
     font-size: clamp(4.4rem, 18vw, 6.2rem);
     font-weight: 400;
     line-height: 0.9;
+  }
+}
+
+/* ================================================================
+   REVISI: background foto pada Ucapan, Tanggal, Wedding Gift, RSVP
+   + efek kaca (glassmorphism) pada field & kartu
+   + foto mempelai full 1 layar (desktop & mobile)
+   Tempelkan PALING BAWAH pada style.css.
+   Siapkan file: fotodoa1.webp, tanggal.webp, gift.webp, konfirmasi.webp
+================================================================ */
+
+/* ---------- 1. UCAPAN: background fotodoa1.webp ---------- */
+#ucapan {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: none !important;
+  color: #fff;
+}
+
+#ucapan::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -14px;
+  background-image:
+    linear-gradient(120deg, rgba(25, 15, 10, 0.72), rgba(25, 15, 10, 0.5)),
+    url("fotodoa1.webp");
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  transform: scale(1.02);
+}
+
+#ucapan .container {
+  position: relative;
+  z-index: 1;
+}
+
+#ucapan .weda-text {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+}
+
+#ucapan .weda-source {
+  color: #fff !important;
+  opacity: 0.92;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* ---------- 2. DETAILS (Tanggal Pelaksanaan): background tanggal.webp ---------- */
+#details {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: none !important;
+  color: #fff;
+}
+
+#details::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -14px;
+  background-image:
+    linear-gradient(120deg, rgba(25, 15, 10, 0.68), rgba(25, 15, 10, 0.45)),
+    url("tanggal.webp");
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  transform: scale(1.02);
+}
+
+#details .container {
+  position: relative;
+  z-index: 1;
+}
+
+#details .container > p,
+#details p.mb-4.reveal {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.68);
+}
+
+#details .wedding-date-row,
+#details .date-side,
+#details .date-main {
+  color: #fff !important;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.68);
+}
+
+#details .date-divider {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+#details .time-box h5,
+#details .time-box p {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.68);
+}
+
+#details .center-ornament {
+  background-color: #fff !important;
+  opacity: 0.85;
+}
+
+/* ---------- 3. WEDDING GIFT: background gift.webp + kartu kaca transparan ---------- */
+#wedding-gift {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: none !important;
+}
+
+#wedding-gift::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -14px;
+  background-image:
+    linear-gradient(120deg, rgba(20, 14, 10, 0.62), rgba(20, 14, 10, 0.42)),
+    url("gift.webp");
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  transform: scale(1.02);
+}
+
+#wedding-gift .container {
+  position: relative;
+  z-index: 1;
+}
+
+#wedding-gift h4 {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+}
+
+#wedding-gift .gift-card {
+  background: rgba(255, 255, 255, 0.12) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28) !important;
+}
+
+#wedding-gift .gift-card .bank,
+#wedding-gift .gift-card .accnum,
+#wedding-gift .gift-card .accname {
+  color: #fff !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
+}
+
+#wedding-gift .gift-card .copyBtn {
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+#wedding-gift .gift-card .copyBtn:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #fff !important;
+}
+
+/* ---------- 4. RSVP (Konfirmasi Kedatangan): background konfirmasi.webp + field kaca transparan ---------- */
+#rsvp {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: none !important;
+  color: #fff;
+}
+
+#rsvp::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -14px;
+  background-image:
+    linear-gradient(120deg, rgba(18, 12, 9, 0.62), rgba(18, 12, 9, 0.42)),
+    url("konfirmasi.webp");
+  background-size: cover;
+  background-position: center;
+  filter: blur(1px);
+  transform: scale(1.02);
+}
+
+#rsvp .container {
+  position: relative;
+  z-index: 1;
+}
+
+#rsvp h3 {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* Form kaca transparan */
+#rsvpForm {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.28) !important;
+}
+
+#rsvpForm .form-label {
+  color: #fff !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+#rsvpForm .form-control,
+#rsvpForm .form-select {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  color: #fff !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#rsvpForm .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.75) !important;
+}
+
+#rsvpForm .form-control:focus,
+#rsvpForm .form-select:focus {
+  background: rgba(255, 255, 255, 0.14) !important;
+  border-color: rgba(255, 255, 255, 0.75) !important;
+  color: #fff !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.15) !important;
+}
+
+#rsvpForm .form-select option {
+  color: #222;
+}
+
+#rsvp .btn-primary {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  color: #fff !important;
+  backdrop-filter: blur(6px);
+}
+
+#rsvp .btn-primary:hover {
+  background: rgba(255, 255, 255, 0.32) !important;
+}
+
+/* Panel hasil ucapan & konfirmasi mengikuti gaya kaca yang sama */
+.rsvp-results {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  border-radius: 0.75rem;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.24) !important;
+  overflow: hidden;
+}
+
+#rsvp .rsvp-results,
+#rsvp .rsvp-results-title {
+  background: transparent;
+}
+
+.rsvp-results-title {
+  color: #fff !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+
+#rsvp .comment-container,
+.comment-container {
+  background: transparent !important;
+  color: #fff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.comment-name {
+  color: #fff !important;
+}
+
+.comment-text {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+.comment-empty {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.comment-divider {
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.badge-hadir {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: #fff !important;
+}
+
+/* ---------- 5. PENGANTIN: foto mempelai full 1 layar penuh (desktop) ---------- */
+/* Mobile (<=768px) sudah full 1 layar via media query yang ada; berikut versi desktop. */
+@media (min-width: 769px) {
+  #pengantin {
+    padding: 0 !important;
+  }
+
+  #pengantin > .container,
+  #pengantin > .container > .row {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
+  #pengantin > .container > .row {
+    flex-wrap: wrap !important;
+  }
+
+  #pengantin .col-lg-6 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 2rem !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #pengantin .pengantin-card {
+    width: 100%;
+    max-width: min(60vw, 620px);
+    height: calc(100vh - 4rem);
+  }
+
+  #pengantin .pengantin-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }

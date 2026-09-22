@@ -2470,11 +2470,13 @@ main > section:not(#doa),
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.88);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  transform: translateY(2rem);
 }
 
 /* 1b. Blok "Dear [Nama Tamu]" */
 .cover .cover-guest-block {
   margin: 1.75rem 0 0;
+  transform: translateY(1rem);
 }
 
 .cover .cover-guest-label {

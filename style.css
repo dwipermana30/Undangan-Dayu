@@ -2390,11 +2390,17 @@ main > section:not(#doa),
       p.pengantin-desc, memakai animasi .reveal yang sudah ada di atas.)
 ================================================================ */
 
-/* 1. Posisi teks Wedding Gift didorong turun dari tengah layar (mobile) */
+/* 1. Posisi teks Wedding Gift: tetap terpusat secara flex, lalu digeser
+      turun ~2 baris teks dari posisi tengah (bukan flex-start, karena
+      flex-start justru menempel ke atas layar / terlihat "naik"). */
 @media (max-width: 768px) {
   #wedding-gift {
-    align-items: flex-start !important;
-    padding-top: 16dvh !important;
+    align-items: center !important;
+    padding-top: 3rem !important;
+  }
+
+  #wedding-gift > .container {
+    transform: translateY(4rem);
   }
 }
 
@@ -2413,4 +2419,10 @@ main > section:not(#doa),
 
 #wedding-gift .gift-card .accname {
   font-size: 0.75rem !important; /* -25% dari 1rem */
+}
+
+/* Hilangkan efek blur pada foto background Wedding Gift */
+#wedding-gift::before {
+  filter: none !important;
+  transform: scale(1) !important;
 }

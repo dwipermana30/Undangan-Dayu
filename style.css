@@ -2531,3 +2531,40 @@ main > section:not(#doa),
   color: rgba(255, 255, 255, 0.75) !important;
   -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
 }
+
+/* ================================================================
+   REVISI 7 (diminta user):
+   1) "WE INVITE YOU TO CELEBRATE OUR WEDDING" dipindah ke bagian atas
+      layar cover, dengan jarak ~2 baris dari tepi atas (bukan mepet).
+   2) Slide penutup (#thanks): "Terima kasih atas doa dan kehadirannya"
+      dipindah ke atas layar dengan jarak yang sama seperti cover-intro,
+      sementara "Matur Suksma" didorong turun ~2 baris dari posisinya.
+================================================================ */
+
+/* 1. Cover-intro ke atas layar */
+.cover .cover-intro {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(85%, 26rem);
+  margin: 0;
+  z-index: 5;
+}
+
+/* 2. Slide penutup: Terima kasih ke atas, Matur Suksma didorong turun */
+@media (max-width: 768px) {
+  #thanks .thanks-intro {
+    position: absolute;
+    top: calc(env(safe-area-inset-top, 0px) + 3rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(85%, 26rem);
+    margin: 0;
+    z-index: 5;
+  }
+
+  #thanks h2 {
+    margin-top: 3rem !important;
+  }
+}

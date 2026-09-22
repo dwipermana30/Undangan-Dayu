@@ -1747,9 +1747,8 @@ main > section:not(#doa),
     min-height: 0;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid rgba(122, 106, 88, 0.2);
-    border-radius: 0.75rem;
-    background: rgba(255, 255, 255, 0.62);
+    border: none;
+    background: transparent;
   }
 
   #rsvp .rsvp-results-title {
@@ -2120,14 +2119,13 @@ main > section:not(#doa),
   background: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* Panel hasil ucapan & konfirmasi - blur sangat tipis agar foto tetap terlihat */
+/* Panel hasil ucapan & konfirmasi - tanpa bingkai, foto latar tetap terlihat */
 .rsvp-results {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4) !important;
-  border-radius: 0.75rem;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.16) !important;
+  background: transparent !important;
+  border: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
   overflow: hidden;
 }
 
@@ -2161,12 +2159,7 @@ main > section:not(#doa),
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
-.comment-divider {
-  border-color: rgba(255, 255, 255, 0.25) !important;
-}
-
 .badge-hadir {
-  background: rgba(255, 255, 255, 0.2) !important;
   color: #fff !important;
 }
 
@@ -2422,27 +2415,35 @@ main > section:not(#doa),
 }
 
 /* ================================================================
-   REVISI 4 (permintaan user):
-   1) Field konfirmasi kehadiran: hilangkan label teks di atas field,
-      tanpa bingkai kartu form (sudah diterapkan di atas via #rsvpForm),
-      urutan Nama -> Ucapan -> Konfirmasi Kehadiran -> tombol Kirim.
-   2) Perbaiki sensitifitas swipe di daftar hasil ucapan (lihat script.js
-      untuk penanganan sentuhan pada .comment-container).
-   3) Warna latar pada tiap hasil ucapan sesuai status kehadiran:
-      hijau untuk Hadir, oranye untuk Tidak Hadir.
+   REVISI 5 (perbaikan diminta user):
+   1) Warna hijau/oranye HANYA pada lingkaran/badge "Hadir" / "Tidak
+      Hadir" itu sendiri, bukan pada seluruh kartu hasil ucapan.
+   2) Bingkai luar pada panel hasil ucapan & konfirmasi dihilangkan.
+   3) Setiap hasil ucapan dipisahkan garis bawah tipis saja, meniru
+      gaya pemisah nomor rekening (.gift-divider) di Wedding Gift.
 ================================================================ */
 
-.comment-item {
-  border-radius: 10px;
-  transition: background-color 0.2s ease;
+.badge-hadir.badge-yes {
+  background: #5d8a5d !important;
+  color: #ffffff !important;
 }
 
-.comment-item.comment-hadir {
-  background: rgba(93, 138, 93, 0.35) !important;
-  padding: 10px 14px !important;
+.badge-hadir.badge-no {
+  background: #e07b2a !important;
+  color: #ffffff !important;
 }
 
-.comment-item.comment-tidak-hadir {
-  background: rgba(230, 126, 34, 0.35) !important;
-  padding: 10px 14px !important;
+.rsvp-results,
+#rsvp .rsvp-results {
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.comment-divider {
+  border: none !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.35) !important;
+  opacity: 1 !important;
+  margin: 12px 0 !important;
 }

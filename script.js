@@ -226,10 +226,10 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
             const pesan = document.getElementById('inputPesan').value.trim();
             const waktu = new Date().getTime();
 
-            if (!nama || nama.length > 80 || pesan.length > 500) {
+            if (!nama || nama.length > 80 || pesan.length > 500 || !kehadiran) {
                 Swal.fire({
                     title: 'Data tidak valid',
-                    text: 'Nama wajib diisi (maks. 80 karakter) dan pesan maksimal 500 karakter.',
+                    text: 'Nama wajib diisi (maks. 80 karakter), konfirmasi kehadiran wajib dipilih, dan pesan maksimal 500 karakter.',
                     icon: 'error',
                     confirmButtonText: 'OK'
                 });
@@ -273,7 +273,8 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
                 hasComments = true;
                 const data = childSnapshot.val();
                 const item = document.createElement('div');
-                item.className = 'comment-item';
+                const isTidakHadir = data.kehadiran === 'Tidak Hadir';
+                item.className = 'comment-item ' + (isTidakHadir ? 'comment-tidak-hadir' : 'comment-hadir');
 
                 const header = document.createElement('div');
                 header.className = 'comment-header';
@@ -282,7 +283,7 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
                 name.textContent = typeof data.nama === 'string' ? data.nama : '';
                 const attendance = document.createElement('span');
                 attendance.className = 'badge-hadir';
-                attendance.textContent = data.kehadiran === 'Tidak Hadir' ? 'Tidak dapat hadir' : 'Hadir';
+                attendance.textContent = isTidakHadir ? 'Tidak dapat hadir' : 'Hadir';
                 header.append(name, attendance);
 
                 const message = document.createElement('p');
@@ -443,7 +444,11 @@ openBtn.addEventListener("click", function(e) {
   let startedInGallery = false;
   main.addEventListener('touchstart', (event) => {
     startY = event.touches[0].clientY;
-    startedInGallery = Boolean(event.target.closest('.photo-gallery'));
+    // .comment-container (hasil ucapan/konfirmasi) diperlakukan sama seperti
+    // .photo-gallery: area ini punya scroll sendiri, jadi jangan langsung
+    // dianggap sebagai gesture pindah slide di sini. Penanganannya dengan
+    // deteksi posisi ujung atas/bawah ada di listener khusus di bawah.
+    startedInGallery = Boolean(event.target.closest('.photo-gallery, .comment-container'));
   }, { passive: true });
 
   main.addEventListener('touchend', (event) => {
@@ -463,6 +468,25 @@ openBtn.addEventListener("click", function(e) {
       if (Math.abs(distance) < 45) return;
       const atTop = gallery.scrollTop <= 1;
       const atBottom = gallery.scrollTop + gallery.clientHeight >= gallery.scrollHeight - 1;
+      if ((distance < 0 && atTop) || (distance > 0 && atBottom)) {
+        go(distance > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  });
+
+  /* Scroll normal di daftar hasil ucapan & konfirmasi kehadiran; swipe
+     hanya pindah ke slide berikutnya/sebelumnya kalau sudah berada persis
+     di ujung atas atau ujung bawah daftar tersebut. */
+  document.querySelectorAll('.comment-container').forEach((container) => {
+    let containerStartY = 0;
+    container.addEventListener('touchstart', (event) => {
+      containerStartY = event.touches[0].clientY;
+    }, { passive: true });
+    container.addEventListener('touchend', (event) => {
+      const distance = containerStartY - event.changedTouches[0].clientY;
+      if (Math.abs(distance) < 45) return;
+      const atTop = container.scrollTop <= 1;
+      const atBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
       if ((distance < 0 && atTop) || (distance > 0 && atBottom)) {
         go(distance > 0 ? 1 : -1);
       }

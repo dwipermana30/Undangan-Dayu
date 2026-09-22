@@ -2249,3 +2249,17 @@ main > section:not(#doa),
     padding: 3rem 1.5rem 6.5rem;
   }
 }
+
+/* ================================================================
+   REVISI: hilangkan animasi slide-in muncul pada foto pengantin 1 & 2
+   Foto langsung terlihat penuh tanpa transisi geser dari kiri/kanan.
+================================================================ */
+#pengantin .col-lg-6 .pengantin-card,
+#pengantin .col-lg-6:nth-child(1) .pengantin-card,
+#pengantin .col-lg-6:nth-child(2) .pengantin-card,
+#pengantin .col-lg-6.animated .pengantin-card {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  pointer-events: auto !important;
+}

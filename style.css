@@ -1356,6 +1356,7 @@ main > section:not(#doa),
   line-height: 0.9;
   letter-spacing: 0.015em;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
+  transform: translateY(3.5rem); /* geser turun agar tidak menutupi wajah pengantin pria */
 }
 
 .cover .cover-ampersand {
@@ -2556,7 +2557,7 @@ main > section:not(#doa),
 @media (max-width: 768px) {
   #thanks .thanks-intro {
     position: absolute;
-    top: calc(env(safe-area-inset-top, 0px) + 3rem);
+    top: calc(env(safe-area-inset-top, 0px) + 4.5rem); /* sedikit turun agar pas di atas kepala */
     left: 50%;
     transform: translateX(-50%);
     width: min(85%, 26rem);
@@ -2566,5 +2567,11 @@ main > section:not(#doa),
 
   #thanks h2 {
     margin-top: 3rem !important;
+  }
+
+  /* Geser seluruh blok (Matur Suksma + nama) turun sekaligus, supaya jarak
+     antar baris tetap sama dan tidak menabrak teks nama di bawahnya */
+  #thanks .thanks-content {
+    transform: translateY(4rem);
   }
 }

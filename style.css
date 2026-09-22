@@ -2447,3 +2447,45 @@ main > section:not(#doa),
   opacity: 1 !important;
   margin: 12px 0 !important;
 }
+
+/* ================================================================
+   REVISI 6 (diminta user):
+   1) Style untuk nama tamu di cover (diisi otomatis via JS dari
+      parameter link ?to=NamaTamu). Elemen: <p id="cover-guest">.
+   2) Perbaikan warna teks pada dropdown "Konfirmasi Kehadiran" agar
+      SAMA seperti warna teks pada field Nama & Ucapan (putih).
+      Sebagian browser (terutama Safari/iOS) memaksa tampilan native
+      <select> memakai warna sistem, mengabaikan CSS color; diperbaiki
+      dengan mereset appearance & menegaskan color-scheme.
+================================================================ */
+
+/* 1. Nama tamu di cover */
+.cover .cover-guest {
+  margin: 0.9rem 0 0;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: clamp(1rem, 3.2vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.5;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.45);
+}
+
+/* 2. Samakan warna teks field Konfirmasi Kehadiran dengan Nama & Ucapan */
+#rsvpForm .form-control,
+#rsvpForm .form-select {
+  color-scheme: light;
+}
+
+#rsvpForm .form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+}
+
+#rsvpForm select.form-select:invalid {
+  color: rgba(255, 255, 255, 0.75) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.75);
+}

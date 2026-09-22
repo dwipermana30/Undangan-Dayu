@@ -27,6 +27,19 @@
     let currentImageIndex = 0;
     let slideshowTimeout;
 
+    // --- 0b. Nama Tamu di Cover (?to=Nama+Tamu) ---
+    const guestNameEl = document.getElementById('cover-guest');
+    if (guestNameEl) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const guestName = urlParams.get('to') || urlParams.get('kepada') || urlParams.get('nama');
+        if (guestName && guestName.trim()) {
+            guestNameEl.textContent = `Kepada Yth. Bapak/Ibu/Saudara/i ${guestName.trim()}`;
+            guestNameEl.style.display = 'block';
+        } else {
+            guestNameEl.style.display = 'none';
+        }
+    }
+
 // --- 1. Hero Slideshow Logic (Fixed No-Flicker) ---
 // --- Update Fungsi showImage agar transisi blur lebih halus ---
 function showImage(nextIndex) {

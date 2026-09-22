@@ -2559,7 +2559,7 @@ main > section:not(#doa),
 @media (max-width: 768px) {
   #thanks .thanks-intro {
     position: absolute;
-    top: calc(env(safe-area-inset-top, 0px) + -1.5rem); /* sedikit turun agar pas di atas kepala */
+    top: calc(env(safe-area-inset-top, 0px) + -2rem); /* sedikit turun agar pas di atas kepala */
     left: 50%;
     transform: translateX(-50%);
     width: min(85%, 26rem);

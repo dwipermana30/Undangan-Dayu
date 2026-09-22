@@ -283,7 +283,7 @@ document.querySelectorAll(".photo-gallery").forEach((gallery) => {
                 name.textContent = typeof data.nama === 'string' ? data.nama : '';
                 const attendance = document.createElement('span');
                 attendance.className = 'badge-hadir ' + (isTidakHadir ? 'badge-no' : 'badge-yes');
-                attendance.textContent = isTidakHadir ? 'Tidak dapat hadir' : 'Hadir';
+                attendance.textContent = isTidakHadir ? 'Tidak Hadir' : 'Hadir';
                 header.append(name, attendance);
 
                 const message = document.createElement('p');

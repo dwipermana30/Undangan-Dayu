@@ -2048,11 +2048,11 @@ main > section:not(#doa),
   z-index: 0;
   inset: -14px;
   background-image:
-    linear-gradient(120deg, rgba(18, 12, 9, 0.62), rgba(18, 12, 9, 0.42)),
+    linear-gradient(120deg, rgba(18, 12, 9, 0.31), rgba(18, 12, 9, 0.21)),
     url("konfirmasi.webp");
   background-size: cover;
   background-position: center;
-  filter: blur(1px);
+  filter: blur(0.5px);
   transform: scale(1.02);
 }
 
